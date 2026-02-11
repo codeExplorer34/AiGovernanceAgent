@@ -63,14 +63,22 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
   ];
 
   return (
+<<<<<<< HEAD
     <div className="space-y-4">
       {/* Executive Overview Cards */}
       <div>
         <h2 className="text-2xl font-bold mb-4">Executive Overview</h2>
+=======
+    <div className="space-y-6">
+      {/* Executive Overview Cards */}
+      <div>
+        <h2 className="text-2xl mb-4">Executive Overview</h2>
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {kpiCards.map((card, index) => {
             const Icon = card.icon;
             const isPositive = card.change > 0;
+<<<<<<< HEAD
 
             return (
               <Card key={index} className="cursor-pointer hover:shadow-lg transition-shadow">
@@ -79,6 +87,16 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
                   <Icon className={`w-4 h-4 ${card.color || 'text-muted-foreground'}`} />
                 </CardHeader>
                 <CardContent className="p-3 pt-1">
+=======
+            
+            return (
+              <Card key={index} className="cursor-pointer hover:shadow-lg transition-shadow">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+                  <Icon className={`w-4 h-4 ${card.color || 'text-muted-foreground'}`} />
+                </CardHeader>
+                <CardContent>
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
                   <div className={`text-2xl mb-1 ${card.color || ''}`}>{card.value}</div>
                   <div className="flex items-center gap-2">
                     <span className={`text-xs flex items-center gap-1 ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
@@ -145,16 +163,27 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
           <CardTitle>AI Usage Trends</CardTitle>
           <CardDescription>AI requests over time, color-coded by decision</CardDescription>
         </CardHeader>
+<<<<<<< HEAD
         <CardContent className="p-4">
           <div className="h-64">
+=======
+        <CardContent>
+          <div className="h-80">
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={mockUsageTrends}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis dataKey="date" className="text-xs" />
                 <YAxis className="text-xs" />
+<<<<<<< HEAD
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
+=======
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'hsl(var(--card))', 
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
                     border: '1px solid hsl(var(--border))',
                     borderRadius: '8px'
                   }}
@@ -175,16 +204,27 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
           <CardTitle>Request Volume Trends</CardTitle>
           <CardDescription>Daily AI request patterns by decision type</CardDescription>
         </CardHeader>
+<<<<<<< HEAD
         <CardContent className="p-4">
           <div className="h-64">
+=======
+        <CardContent>
+          <div className="h-80">
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={mockUsageTrends}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis dataKey="date" className="text-xs" />
                 <YAxis className="text-xs" />
+<<<<<<< HEAD
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
+=======
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'hsl(var(--card))', 
+>>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
                     border: '1px solid hsl(var(--border))',
                     borderRadius: '8px'
                   }}
