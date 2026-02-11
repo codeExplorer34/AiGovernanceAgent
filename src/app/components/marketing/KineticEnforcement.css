@@ -1,0 +1,145 @@
+.kinetic-section {
+    --count: 8;
+    --end: 360;
+    --step: calc(var(--end) / var(--count));
+    position: relative;
+    z-index: 10;
+}
+
+.list-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    height: 100vh;
+}
+
+.list-intro {
+    font-size: clamp(2.5rem, 6vw, 6.5rem);
+    font-weight: 500;
+    /* Playfair looks better at medium weight */
+    min-width: max-content;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.kinetic-list {
+    flex-grow: 1;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    font-weight: 700;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.02em;
+    height: 1.5em;
+}
+
+.kinetic-item {
+    line-height: 1;
+    opacity: 0;
+    transition: color 0.3s ease;
+    text-transform: lowercase;
+    will-change: opacity, filter, transform, letter-spacing;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    pointer-events: none;
+    font-style: italic;
+    /* Cinematic touch for verbs */
+}
+
+.kinetic-item__verb {
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Flicker effect for active items (simulated via animation) */
+@keyframes textFlicker {
+    0% {
+        opacity: 1;
+    }
+
+    5% {
+        opacity: 0.8;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    15% {
+        opacity: 0.9;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.kinetic-item.active .kinetic-item__verb {
+    animation: textFlicker 4s infinite;
+}
+
+/* Color Wheel Effect */
+.kinetic-item:not(:last-of-type) .kinetic-item__verb {
+    color: oklch(70% 0.25 calc(var(--i) * var(--step)));
+}
+
+/* Timestamp and code metadata */
+.kinetic-item__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8em;
+    font-size: 0.18em;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    color: rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+    font-style: normal;
+    /* Keep meta normal font style */
+}
+
+.kinetic-item__timestamp {
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.kinetic-item__code {
+    color: rgba(168, 85, 247, 0.35);
+}
+
+/* Base state for GSAP */
+.kinetic-item {
+    filter: blur(10px);
+}
+
+@media (max-width: 1024px) {
+    .list-container {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .list-intro {
+        font-size: 2.2rem;
+    }
+
+    .kinetic-list {
+        font-size: 2.5rem;
+        width: 100%;
+        height: 2em;
+    }
+
+    .kinetic-item__meta {
+        display: none;
+    }
+}

@@ -1,0 +1,227 @@
+/* Marketing Site Styles */
+
+/* Custom CSS Variables for branding */
+:root {
+    --purple-600: #7c3aed;
+    --purple-400: #a78bfa;
+    --blue-600: #2563eb;
+    --blue-400: #60a5fa;
+    --cyan-500: #06b6d4;
+    --emerald-500: #10b981;
+    --pink-500: #ec4899;
+    --indigo-500: #6366f1;
+    --orange-500: #f97316;
+    --yellow-500: #eab308;
+    --slate-900: #0f172a;
+    --neutral-900: #171717;
+}
+
+/* Smooth Scrolling removed for dashboard compatibility */
+
+/* Typography improvements */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Gradient text utilities */
+.gradient-text {
+    background: linear-gradient(to right, var(--purple-400), var(--blue-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Focus states for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid var(--purple-600);
+    outline-offset: 2px;
+}
+
+/* Responsive image handling */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Print styles */
+@media print {
+
+    nav,
+    footer {
+        display: none;
+    }
+}
+
+/* Hand-drawn Marker Highlight */
+.marker-highlight {
+    background: #7c3aed;
+    color: #f8fafc !important;
+    padding: 0.1em 0.4em;
+    margin: 0 -0.1em;
+    border-radius: 12% 8% 15% 10% / 15% 12% 18% 12%;
+    transform: rotate(-1.5deg);
+    display: inline-block;
+    box-shadow: 2px 2px 15px rgba(124, 58, 237, 0.4);
+    -webkit-text-fill-color: #f8fafc !important;
+    background-clip: padding-box !important;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.marker-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -3px -6px;
+    background: #7c3aed;
+    z-index: -1;
+    border-radius: 4px 12px 6px 15px;
+    transform: rotate(0.8deg);
+    opacity: 0.7;
+    animation: marker-draw 0.4s ease-out forwards;
+}
+
+@keyframes marker-draw {
+    0% {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+        transform: rotate(0deg) scale(0.9);
+    }
+
+    100% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: rotate(0.8deg) scale(1);
+    }
+}
+
+/* Global Branding Typography */
+.brand-heading {
+    font-family: 'Playfair Display', serif !important;
+}
+
+.font-playfair {
+    font-family: 'Playfair Display', serif !important;
+}
+
+.font-salina {
+    font-family: 'Bodoni Moda', serif !important;
+}
+
+/* Product video scroll scene (SWork-inspired depth) */
+.product-video-section {
+    --scroll-progress: 0;
+}
+
+.product-video-scene {
+    --scene-progress: var(--scroll-progress);
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transform:
+        perspective(1400px) rotateX(calc((var(--scene-progress) - 0.5) * -10deg)) rotateY(calc((var(--scene-progress) - 0.5) * 14deg)) translate3d(0,
+            calc((var(--scene-progress) - 0.5) * -40px),
+            0);
+    transition: transform 0.2s ease-out;
+}
+
+.product-video-scene::before {
+    content: "";
+    position: absolute;
+    inset: 12% -10%;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(147, 51, 234, 0.18), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(56, 189, 248, 0.22), transparent 60%);
+    opacity: calc(0.4 + var(--scene-progress) * 0.4);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.product-video-scene .VideoPlayer {
+    will-change: transform, box-shadow;
+}
+
+/* Hero headline split-text styling (AW-inspired) */
+.hero-headline {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-headline__row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.16em;
+}
+
+.hero-headline__word {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.hero-headline__char {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.hero-headline__char-inner {
+    position: relative;
+    top: 0.08em;
+    display: block;
+    will-change: transform;
+    color: #f9fafb;
+}
+
+.hero-headline__char-inner::before {
+    position: absolute;
+    content: attr(data-letter);
+    pointer-events: none;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    color: rgba(148, 163, 184, 0.35);
+}
+
+.hero-headline__secondary {
+    display: inline-block;
+    margin-top: 0.15em;
+}

@@ -1,0 +1,88 @@
+/* Premium Typography System */
+@layer base {
+
+    /* Font Family Definitions */
+    :root {
+        --font-display: 'Space Grotesk', system-ui, sans-serif;
+        --font-serif: 'Fraunces', Georgia, serif;
+        --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+}
+
+/* Hero Meta Label */
+.hero-meta {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #7a8191;
+}
+
+/* Hero Main Title */
+.hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    color: #f5f7ff;
+}
+
+/* Hero Subtitle/Accent */
+.hero-sub {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    color: #a78bfa;
+    font-style: italic;
+}
+
+/* Hero Body */
+.hero-body {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #c2c7d5;
+    max-width: 42rem;
+    font-weight: 400;
+}
+
+/* Premium Display Text */
+.display-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+/* Accent Text */
+.accent-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+}
+
+/* Body Text */
+.body-text {
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Small Caps Label */
+.label-text {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Flip Words Container */
+.flip-words-container {
+    display: inline-block;
+    position: relative;
+    vertical-align: baseline;
+    min-width: 200px;
+    text-align: left;
+}
