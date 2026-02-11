@@ -15,10 +15,7 @@ export function AEGISDashboard() {
   const [selectedEvent, setSelectedEvent] = useState<AIEvent | null>(null);
   const [timeFilter, setTimeFilter] = useState<string>("7days");
   const [searchQuery, setSearchQuery] = useState<string>("");
-<<<<<<< HEAD
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-=======
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 
   const renderView = () => {
     switch (currentView) {
@@ -41,7 +38,6 @@ export function AEGISDashboard() {
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-<<<<<<< HEAD
       <Sidebar
         currentView={currentView}
         onNavigate={setCurrentView}
@@ -52,41 +48,22 @@ export function AEGISDashboard() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <TopBar
           timeFilter={timeFilter}
-=======
-      <Sidebar currentView={currentView} onNavigate={setCurrentView} />
-      
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <TopBar 
-          timeFilter={timeFilter} 
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
           onTimeFilterChange={setTimeFilter}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
-<<<<<<< HEAD
 
         <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto w-full">
             {renderView()}
           </div>
-=======
-        
-        <main className="flex-1 overflow-auto p-6">
-          {renderView()}
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
         </main>
       </div>
 
       {selectedEvent && (
-<<<<<<< HEAD
         <EventDetailPanel
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
-=======
-        <EventDetailPanel 
-          event={selectedEvent} 
-          onClose={() => setSelectedEvent(null)} 
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
         />
       )}
     </div>

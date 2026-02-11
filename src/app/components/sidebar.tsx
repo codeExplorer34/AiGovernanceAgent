@@ -1,20 +1,12 @@
-<<<<<<< HEAD
 import { Shield, LayoutDashboard, Activity, FileText, Eye, ScrollText, Settings, X, ChevronLeft, Home } from "lucide-react";
 import { cn } from "./ui/utils";
 import { Link } from "react-router-dom";
-=======
-import { Shield, LayoutDashboard, Activity, FileText, Eye, ScrollText, Settings } from "lucide-react";
-import { cn } from "./ui/utils";
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 
 interface SidebarProps {
   currentView: string;
   onNavigate: (view: string) => void;
-<<<<<<< HEAD
   isCollapsed?: boolean;
   onToggleCollapse?: () => void;
-=======
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 }
 
 const navItems = [
@@ -26,7 +18,6 @@ const navItems = [
   { id: "settings", label: "Settings", icon: Settings }
 ];
 
-<<<<<<< HEAD
 export function Sidebar({ currentView, onNavigate, isCollapsed, onToggleCollapse }: SidebarProps) {
   return (
     <aside className={cn(
@@ -51,38 +42,19 @@ export function Sidebar({ currentView, onNavigate, isCollapsed, onToggleCollapse
         >
           {isCollapsed ? <ChevronLeft className="w-5 h-5 rotate-180" /> : <ChevronLeft className="w-5 h-5" />}
         </button>
-=======
-export function Sidebar({ currentView, onNavigate }: SidebarProps) {
-  return (
-    <aside className="w-64 bg-card border-r border-border flex flex-col">
-      <div className="p-6 border-b border-border">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-            <Shield className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h1 className="font-semibold text-lg">AEGIS</h1>
-            <p className="text-xs text-muted-foreground">AI Governance</p>
-          </div>
-        </div>
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
       </div>
 
       <nav className="flex-1 p-4 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentView === item.id;
-<<<<<<< HEAD
 
-=======
-          
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
+
           return (
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
               className={cn(
-<<<<<<< HEAD
                 "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                 isActive
                   ? "bg-primary text-primary-foreground"
@@ -98,22 +70,11 @@ export function Sidebar({ currentView, onNavigate }: SidebarProps) {
               )}>
                 {item.label}
               </span>
-=======
-                "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
-                isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-              )}
-            >
-              <Icon className="w-4 h-4" />
-              <span>{item.label}</span>
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
             </button>
           );
         })}
       </nav>
 
-<<<<<<< HEAD
       <div className="p-4 border-t border-border space-y-4">
         <Link
           to="/"
@@ -138,12 +99,6 @@ export function Sidebar({ currentView, onNavigate }: SidebarProps) {
             <div>Version 2.1.0</div>
             <div className="mt-1">© 2026 AEGIS AI</div>
           </div>
-=======
-      <div className="p-4 border-t border-border">
-        <div className="text-xs text-muted-foreground">
-          <div>Version 2.1.0</div>
-          <div className="mt-1">© 2026 AEGIS</div>
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
         </div>
       </div>
     </aside>

@@ -2,19 +2,11 @@ import { Search, Moon, Sun, ChevronDown } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-<<<<<<< HEAD
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-=======
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 } from "./ui/dropdown-menu";
 import { useTheme } from "./theme-provider";
 
@@ -38,7 +30,6 @@ export function TopBar({ timeFilter, onTimeFilterChange, searchQuery, onSearchCh
 
   return (
     <header className="h-16 border-b border-border bg-card px-6 flex items-center justify-between">
-<<<<<<< HEAD
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <span>Governance</span>
@@ -46,8 +37,6 @@ export function TopBar({ timeFilter, onTimeFilterChange, searchQuery, onSearchCh
           <span className="text-foreground font-medium">{currentFilterLabel}</span>
         </div>
       </div>
-=======
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
       <div className="flex-1 max-w-xl">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -71,11 +60,8 @@ export function TopBar({ timeFilter, onTimeFilterChange, searchQuery, onSearchCh
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {timeFilterOptions.map((option) => (
-<<<<<<< HEAD
               <DropdownMenuItem
-=======
-              <DropdownMenuItem 
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
+
                 key={option.value}
                 onClick={() => onTimeFilterChange(option.value)}
               >

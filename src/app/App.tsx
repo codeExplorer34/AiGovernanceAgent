@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage";
@@ -20,15 +19,5 @@ export default function App() {
         </Routes>
       </Atmosphere>
     </Router>
-=======
-import { AEGISDashboard } from "./components/aegis-dashboard";
-import { ThemeProvider } from "./components/theme-provider";
-
-export default function App() {
-  return (
-    <ThemeProvider>
-      <AEGISDashboard />
-    </ThemeProvider>
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
   );
 }
