@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.gitignore
+backend
+Dockerfile
+docker-compose.yml
+README.md
+AEGIS_*.md
+Inspiration website images
+docs
+guidelines
+.agent
+brain

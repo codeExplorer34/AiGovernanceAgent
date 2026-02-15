@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-<<<<<<< HEAD
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -21,47 +20,26 @@ build/
 # IDE / Editor
 .vscode/
 .idea/
-=======
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
 .DS_Store
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-<<<<<<< HEAD
-# OS files
-.DS_Store
-Thumbs.db
+# Testing
+coverage/
+.nyc_output
 
 # Environment variables
 .env
 .env.staging
 .env.production
-=======
-# Testing
-coverage/
-.nyc_output
-
-# Environment
-.env
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-<<<<<<< HEAD
 # Agent / Tooling
 .gemini/
 .agent/
@@ -70,7 +48,6 @@ brain/
 # Temporary files
 tmp/
 temp/
-=======
+
 # Vite
 .vite/
->>>>>>> 57f4e505e36fdaf9a12cd1c15c7823a25daf6aca

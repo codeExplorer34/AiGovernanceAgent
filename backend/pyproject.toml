@@ -1,0 +1,18 @@
+[project]
+name = "aegis-backend"
+version = "0.1.0"
+description = "FastAPI backend for AEGIS AI Governance Dashboard"
+dependencies = [
+    "fastapi[all]",
+    "pydantic[email]>=2.0",
+    "sqlalchemy>=2.0",
+    "alembic",
+    "psycopg2-binary",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "python-dotenv",
+    "cors",
+]
+
+[tool.uv]
+package = true

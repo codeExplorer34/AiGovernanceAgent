@@ -1,7 +1,14 @@
 {
-  "name": "@figma/my-make-file",
-  "private": true,
-  "version": "0.0.1",
+  "name": "aegis-ai-governance",
+  "description": "Enterprise AI Governance Dashboard with FastAPI and React",
+  "private": false,
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Your Name <your.email@example.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/AiGovernanceAgent.git"
+  },
   "type": "module",
   "scripts": {
     "build": "vite build",
