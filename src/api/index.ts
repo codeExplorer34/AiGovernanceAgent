@@ -30,3 +30,30 @@ export async function fetchShadowAI(): Promise<ShadowAIDetection[]> {
   if (!response.ok) throw new Error("Failed to fetch shadow AI");
   return response.json();
 }
+
+export async function createPolicy(policy: Partial<Policy>): Promise<Policy> {
+  const response = await fetch(`${API_BASE_URL}/policies`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(policy),
+  });
+  if (!response.ok) throw new Error("Failed to create policy");
+  return response.json();
+}
+
+export async function updatePolicy(id: string, policy: Partial<Policy>): Promise<Policy> {
+  const response = await fetch(`${API_BASE_URL}/policies/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(policy),
+  });
+  if (!response.ok) throw new Error("Failed to update policy");
+  return response.json();
+}
+
+export async function deletePolicy(id: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/policies/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to delete policy");
+}

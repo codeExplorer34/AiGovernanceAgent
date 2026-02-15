@@ -15,10 +15,17 @@ import { Shield, AlertTriangle, TrendingUp, Loader2 } from "lucide-react";
 import { fetchPolicies } from "@/api";
 import type { Policy, RiskLevel } from "@/types";
 
-export function PolicyEnforcementView() {
+interface PolicyEnforcementViewProps {
+  onCreateNew?: () => void;
+  onEditPolicy?: (policy: Policy) => void;
+  refreshKey?: number;
+}
+
+export function PolicyEnforcementView({ onCreateNew, onEditPolicy, refreshKey }: PolicyEnforcementViewProps) {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [internalRefreshKey, setInternalRefreshKey] = useState(0);
 
   useEffect(() => {
     const loadPolicies = async () => {
@@ -33,7 +40,25 @@ export function PolicyEnforcementView() {
       }
     };
     loadPolicies();
-  }, []);
+  }, [refreshKey, internalRefreshKey]);
+
+  const handleToggleStatus = async (policyId: string, currentStatus: string) => {
+    const newStatus = currentStatus === "Active" ? "Disabled" : "Active";
+    
+    // Optimistic UI update
+    setPolicies(prev => prev.map(p => 
+      p.policy_id === policyId ? { ...p, status: newStatus as "Active" | "Disabled" } : p
+    ));
+
+    try {
+      const { updatePolicy } = await import("@/api");
+      await updatePolicy(policyId, { status: newStatus });
+    } catch (err) {
+      console.error("Toggle failed", err);
+      // Revert on failure
+      setInternalRefreshKey(prev => prev + 1);
+    }
+  };
 
   const getRiskBadge = (risk: RiskLevel) => {
     const variants = {
@@ -69,7 +94,7 @@ export function PolicyEnforcementView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl">Policy Enforcement</h2>
-        <Button>Create New Policy</Button>
+        <Button onClick={onCreateNew}>Create New Policy</Button>
       </div>
 
       {/* Policy Summary Cards */}
@@ -165,14 +190,23 @@ export function PolicyEnforcementView() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Switch checked={policy.status === "Active"} />
+                      <Switch 
+                        checked={policy.status === "Active"} 
+                        onCheckedChange={() => handleToggleStatus(policy.policy_id, policy.status)}
+                      />
                       <Badge variant={policy.status === "Active" ? "default" : "secondary"}>
                         {policy.status}
                       </Badge>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline" size="sm">Edit</Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => onEditPolicy?.(policy)}
+                    >
+                      Edit
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

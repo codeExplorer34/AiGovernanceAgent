@@ -83,7 +83,14 @@ class PolicyBase(BaseModel):
     description: str
 
 class PolicyCreate(PolicyBase):
-    pass
+    violation_count: Optional[int] = 0
+
+class PolicyUpdate(BaseModel):
+    name: Optional[str] = None
+    risk_level: Optional[RiskLevel] = None
+    status: Optional[str] = None
+    regulation: Optional[str] = None
+    description: Optional[str] = None
 
 class Policy(PolicyBase):
     model_config = ConfigDict(from_attributes=True)
@@ -107,6 +114,12 @@ class ShadowAIDetectionCreate(ShadowAIDetectionBase):
 class ShadowAIDetection(ShadowAIDetectionBase):
     model_config = ConfigDict(from_attributes=True)
 
+class UsageTrend(BaseModel):
+    date: str
+    allowed: int
+    flagged: int
+    blocked: int
+
 class DashboardMetrics(BaseModel):
     total_requests: int
     total_requests_change: float
@@ -119,3 +132,4 @@ class DashboardMetrics(BaseModel):
     shadow_ai_incidents_change: float
     overall_risk: RiskLevel
     governance_score: int
+    usage_trends: List[UsageTrend]

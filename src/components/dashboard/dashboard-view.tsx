@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { TrendingUp, TrendingDown, Shield, AlertTriangle, Ban, CheckCircle, Activity, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchMetrics } from "@/api";
-import { mockUsageTrends } from "@/api/mock";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { GovernanceScoreGauge } from "./governance-score-gauge";
 import type { AIEvent, DashboardMetrics } from "@/types";
@@ -10,9 +9,10 @@ import type { AIEvent, DashboardMetrics } from "@/types";
 interface DashboardViewProps {
   timeFilter: string;
   onEventClick: (event: AIEvent) => void;
+  refreshKey?: number;
 }
 
-export function DashboardView({ timeFilter }: DashboardViewProps) {
+export function DashboardView({ timeFilter, onEventClick, refreshKey }: DashboardViewProps) {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       }
     };
     loadData();
-  }, [timeFilter]);
+  }, [timeFilter, refreshKey]);
 
   if (loading) {
     return (
@@ -190,7 +190,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
         <CardContent className="p-4">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={mockUsageTrends}>
+              <BarChart data={metrics.usage_trends}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis dataKey="date" className="text-xs" />
                 <YAxis className="text-xs" />
@@ -220,7 +220,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
         <CardContent className="p-4">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={mockUsageTrends}>
+              <LineChart data={metrics.usage_trends}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis dataKey="date" className="text-xs" />
                 <YAxis className="text-xs" />

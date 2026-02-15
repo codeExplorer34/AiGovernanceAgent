@@ -1,10 +1,16 @@
+import sys
+import os
+import uuid
+from datetime import datetime, timedelta
+
+# Add the project root to sys.path to allow running from any directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from app.db.session import SessionLocal, engine, DATABASE_URL
 from app.models.models import (
     AIEventModel, PolicyModel, ShadowAIDetectionModel, Base,
     OrganizationModel, TeamModel, ApplicationModel, AIModelModel
 )
-from datetime import datetime, timedelta
-import uuid
 
 def seed_db():
     print(f"Seeding database with URL: {DATABASE_URL}")
@@ -12,13 +18,16 @@ def seed_db():
     print("MetaData.create_all called")
     db = SessionLocal()
     
-    # Check if organizations already exist
-    try:
-        if db.query(OrganizationModel).first():
-            print("Database already seeded")
-            return
-    except Exception as e:
-        print(f"Error checking for existing data: {e}")
+    # Optional: Clear existing data to allow re-seeding without integrity errors
+    print("Clearing existing data...")
+    db.query(AIEventModel).delete()
+    db.query(ShadowAIDetectionModel).delete()
+    db.query(PolicyModel).delete()
+    db.query(ApplicationModel).delete()
+    db.query(TeamModel).delete()
+    db.query(AIModelModel).delete()
+    db.query(OrganizationModel).delete()
+    db.commit()
 
     # 1. Create Organization
     org = OrganizationModel(name="AEGIS Corp")
@@ -74,26 +83,40 @@ def seed_db():
     ]
     db.add_all(policies)
 
-    # 6. Mock Events
-    events = [
-        AIEventModel(
-            event_id="evt_2026_001",
-            timestamp=datetime.utcnow(),
-            app_id=apps["CRM"].id,
-            model_id=models_registry["GPT4"].id,
-            team="Customer Success", # Legacy
-            app="CRM Integration", # Legacy
-            model="GPT-4", # Legacy
-            data_type="Customer PII",
-            decision="Blocked",
-            risk_level="High",
-            policy_triggered="P-102",
-            regulation_mapping="GDPR Article 25",
-            explanation="This request was blocked because customer PII was detected.",
-            user="sarah.chen@company.com"
-        )
-    ]
+    # 6. Mock Events (Temporal for Trends)
+    decisions = ["Allowed", "Flagged", "Blocked"]
+    risk_levels = ["Low", "Medium", "High"]
+    
+    events = []
+    base_time = datetime.utcnow()
+    
+    for day_offset in range(7):
+        timestamp = base_time - timedelta(days=day_offset)
+        # Generate varied request counts per day for better visualization
+        num_events = 15 - day_offset 
+        for i in range(num_events):
+            decision = decisions[i % 3]
+            # Bias toward allowed
+            if i % 5 != 0: decision = "Allowed"
+            
+            events.append(AIEventModel(
+                event_id=f"evt_2026_{day_offset}_{i}",
+                timestamp=timestamp,
+                app_id=apps["CRM"].id,
+                model_id=models_registry["GPT4"].id,
+                team="Customer Success",
+                app="CRM Integration",
+                model="GPT-4",
+                data_type="Generic Data",
+                decision=decision,
+                risk_level=risk_levels[i % 3],
+                policy_triggered="P-102" if decision != "Allowed" else None,
+                explanation="Verified against governance standards.",
+                user="system@aegis.ai"
+            ))
+    
     db.add_all(events)
+    print(f"Generated {len(events)} temporal events for trend testing")
 
     # 7. Mock Shadow AI
     shadow_ai = [

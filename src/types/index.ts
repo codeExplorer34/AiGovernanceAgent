@@ -73,6 +73,13 @@ export interface ShadowAIDetection {
   request_count: number;
 }
 
+export interface UsageTrend {
+  date: string;
+  allowed: number;
+  flagged: number;
+  blocked: number;
+}
+
 export interface DashboardMetrics {
   total_requests: number;
   total_requests_change: number;
@@ -85,4 +92,5 @@ export interface DashboardMetrics {
   shadow_ai_incidents_change: number;
   overall_risk: RiskLevel;
   governance_score: number;
+  usage_trends: UsageTrend[];
 }

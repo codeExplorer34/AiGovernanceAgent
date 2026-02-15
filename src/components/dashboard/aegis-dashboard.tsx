@@ -8,23 +8,77 @@ import { ShadowAIView } from "./shadow-ai-view";
 import { AuditLogsView } from "./audit-logs-view";
 import { SettingsView } from "./settings-view";
 import { EventDetailPanel } from "./event-detail-panel";
-import type { AIEvent } from "@/types";
+import { PolicyFormPanel } from "./policy-form-panel";
+import type { AIEvent, Policy } from "@/types";
+import { createPolicy, updatePolicy } from "@/api";
 
 export function AEGISDashboard() {
   const [currentView, setCurrentView] = useState<string>("dashboard");
   const [selectedEvent, setSelectedEvent] = useState<AIEvent | null>(null);
+  const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
+  const [isPolicyPanelOpen, setIsPolicyPanelOpen] = useState(false);
   const [timeFilter, setTimeFilter] = useState<string>("7days");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [policiesRefreshKey, setPoliciesRefreshKey] = useState(0);
+
+  const handleCreatePolicy = () => {
+    setSelectedPolicy(null);
+    setIsPolicyPanelOpen(true);
+  };
+
+  const handleEditPolicy = (policy: Policy) => {
+    setSelectedPolicy(policy);
+    setIsPolicyPanelOpen(true);
+  };
+
+  const handleSavePolicy = async (policy: Partial<Policy>) => {
+    try {
+      if (selectedPolicy) {
+        await updatePolicy(selectedPolicy.policy_id, policy);
+      } else {
+        await createPolicy(policy as Policy);
+      }
+      setPoliciesRefreshKey(prev => prev + 1);
+      setIsPolicyPanelOpen(false);
+    } catch (err) {
+      console.error("Save failed", err);
+      throw err;
+    }
+  };
+
+  const handleDeletePolicy = async (id: string) => {
+    try {
+      const { deletePolicy } = await import("@/api");
+      await deletePolicy(id);
+      setPoliciesRefreshKey(prev => prev + 1);
+      setIsPolicyPanelOpen(false);
+    } catch (err) {
+      console.error("Delete failed", err);
+      throw err;
+    }
+  };
 
   const renderView = () => {
     switch (currentView) {
       case "dashboard":
-        return <DashboardView timeFilter={timeFilter} onEventClick={setSelectedEvent} />;
+        return (
+          <DashboardView 
+            timeFilter={timeFilter} 
+            onEventClick={setSelectedEvent} 
+            refreshKey={policiesRefreshKey}
+          />
+        );
       case "ai-activity":
         return <AIActivityView searchQuery={searchQuery} timeFilter={timeFilter} onEventClick={setSelectedEvent} />;
       case "policy-enforcement":
-        return <PolicyEnforcementView />;
+        return (
+          <PolicyEnforcementView 
+            onCreateNew={handleCreatePolicy} 
+            onEditPolicy={handleEditPolicy} 
+            refreshKey={policiesRefreshKey}
+          />
+        );
       case "shadow-ai":
         return <ShadowAIView onEventClick={setSelectedEvent} />;
       case "audit-logs":
@@ -32,12 +86,18 @@ export function AEGISDashboard() {
       case "settings":
         return <SettingsView />;
       default:
-        return <DashboardView timeFilter={timeFilter} onEventClick={setSelectedEvent} />;
+        return (
+          <DashboardView 
+            timeFilter={timeFilter} 
+            onEventClick={setSelectedEvent} 
+            refreshKey={policiesRefreshKey}
+          />
+        );
     }
   };
 
   return (
-    <div className="flex h-screen bg-background overflow-hidden">
+    <div className="flex h-screen bg-background overflow-hidden relative">
       <Sidebar
         currentView={currentView}
         onNavigate={setCurrentView}
@@ -64,6 +124,15 @@ export function AEGISDashboard() {
         <EventDetailPanel
           event={selectedEvent}
           onClose={() => setSelectedEvent(null)}
+        />
+      )}
+
+      {isPolicyPanelOpen && (
+        <PolicyFormPanel
+          policy={selectedPolicy}
+          onClose={() => setIsPolicyPanelOpen(false)}
+          onSave={handleSavePolicy}
+          onDelete={handleDeletePolicy}
         />
       )}
     </div>
