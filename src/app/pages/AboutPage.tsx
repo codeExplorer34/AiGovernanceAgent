@@ -95,12 +95,14 @@ export function AboutPage() {
                                 </p>
 
                                 <div className="flex items-center gap-6">
-                                    <Link
-                                        to="/dashboard"
+                                    <a
+                                        href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="bg-cyan-400 text-black px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-cyan-300 transition-all flex items-center gap-3 group shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                                     >
-                                        Book Enterprise Demo <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
+                                        Connect on LinkedIn <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </a>
                                     <button
                                         onClick={() => window.location.href = "mailto:suhaybshaik@outlook.com?subject=Whitepaper Request"}
                                         className="text-white/60 hover:text-cyan-400 transition-colors flex items-center gap-3 group px-4 py-2 border border-white/5 hover:border-cyan-400/30 rounded-lg bg-white/5 backdrop-blur-sm"
@@ -905,22 +907,24 @@ export function AboutPage() {
                                 COMMAND_PROTOCOL // ACTIVE
                             </p>
                             <h2 className="text-5xl md:text-7xl font-light brand-heading mb-8 leading-tight">
-                                <TextAnimate animation="blurInUp" as="span" by="word">See SURO in Action</TextAnimate>
+                                <TextAnimate animation="blurInUp" as="span" by="word">Let's Build Something</TextAnimate>
                             </h2>
                             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-                                Experience how{" "}
-                                <span className="text-cyan-400 font-semibold">real-time AI governance</span>{" "}
-                                transforms autonomous systems from risky to trustworthy. See policy enforcement,
-                                behavioral scoring, and intent alignment in action.
+                                I built SURO to explore what{" "}
+                                <span className="text-cyan-400 font-semibold">principled AI governance</span>{" "}
+                                looks like when you actually implement it — not just theorize about it.
+                                If this resonates with the work you're doing, I'd love to connect.
                             </p>
-                            <Link
-                                to="/contact"
+                            <a
+                                href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center gap-3 bg-cyan-400 hover:bg-cyan-300 text-black px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest shadow-[0_0_60px_rgba(34,211,238,0.5)] hover:shadow-[0_0_80px_rgba(34,211,238,0.7)] transition-all duration-300 group"
                                 style={{ fontFamily: "'Playfair Display', serif" }}
                             >
-                                Book Enterprise Demo{" "}
+                                Connect on LinkedIn{" "}
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                            </Link>
+                            </a>
                         </motion.div>
                     </div>
                 </div>

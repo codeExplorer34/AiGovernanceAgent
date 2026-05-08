@@ -32,12 +32,14 @@ export function MobileCTABar() {
                     <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
 
                     <div className="bg-black/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex items-center gap-3">
-                        <Link
-                            to="/contact"
+                        <a
+                            href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex-1 flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 active:scale-[0.98] text-white py-3.5 rounded-xl text-sm font-semibold transition-all"
                         >
-                            Book Enterprise Demo <ArrowRight className="w-4 h-4" />
-                        </Link>
+                            Connect on LinkedIn <ArrowRight className="w-4 h-4" />
+                        </a>
                         <Link
                             to="/dashboard"
                             className="px-4 py-3.5 rounded-xl border border-white/15 text-white/70 text-sm font-medium active:bg-white/10 transition-all whitespace-nowrap"

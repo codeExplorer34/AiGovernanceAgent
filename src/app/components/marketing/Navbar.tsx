@@ -84,8 +84,8 @@ export function Navbar() {
                             className="hidden md:block bg-purple-600/90 hover:bg-purple-500/90 text-white px-7 py-2.5 rounded-lg text-xs font-medium transition-all shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2),0_4px_12px_rgba(139,92,246,0.3)] hover:scale-[1.02] border-t border-white/10"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
-                            Get Started
-                        </Link>
+                        View Demo
+                    </Link>
 
                         {/* Mobile Hamburger Button */}
                         <button
@@ -137,17 +137,19 @@ export function Navbar() {
                             transition={{ delay: navLinks.length * 0.06 }}
                             className="mt-10 px-8 w-full"
                         >
-                            <Link
-                                to="/dashboard"
+                            <a
+                                href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="block text-center bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white w-full py-4 rounded-2xl text-base font-semibold transition-all"
                             >
-                                Get Started →
-                            </Link>
+                                Connect on LinkedIn
+                            </a>
                             <Link
-                                to="/contact"
-                                className="block text-center text-white/40 w-full py-4 text-sm mt-2"
+                                to="/dashboard"
+                                className="block text-center text-white/40 w-full py-4 text-sm mt-2 hover:text-white/60 transition-colors"
                             >
-                                Book Enterprise Demo
+                                View Demo Dashboard
                             </Link>
                         </motion.div>
 

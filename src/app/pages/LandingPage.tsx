@@ -186,19 +186,21 @@ export function LandingPage() {
                             className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 flex-wrap w-full sm:w-auto"
                         >
                             {isMobile ? (
-                                <button
-                                    onClick={() => navigate("/contact")}
-                                    className="w-full max-w-xs border border-cyan-400 text-cyan-400 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all active:scale-95 active:bg-cyan-400/10"
+                                <a
+                                    href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full max-w-xs border border-cyan-400 text-cyan-400 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all active:scale-95 active:bg-cyan-400/10 text-center block"
                                 >
-                                    Book Enterprise Demo
-                                </button>
+                                    Connect on LinkedIn
+                                </a>
                             ) : (
                                 <MagneticButton
-                                    onClick={() => navigate("/contact")}
+                                    onClick={() => window.open("https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/", "_blank")}
                                     strength={0.2}
                                     className="group relative border border-cyan-400 text-cyan-400 px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden hover:shadow-[0_0_20px_rgba(0,255,255,0.6)]"
                                 >
-                                    <span className="relative z-10 transition-colors uppercase">Book Enterprise Demo</span>
+                                    <span className="relative z-10 transition-colors uppercase">Connect on LinkedIn</span>
                                     <div className="absolute inset-0 bg-cyan-400/20 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-0" />
                                 </MagneticButton>
                             )}
@@ -625,24 +627,29 @@ export function LandingPage() {
 
                 <div className="relative z-10 max-w-4xl mx-auto text-center">
                     <Badge className="mb-8">
-                        Ready to Deploy?
+                        Open to Collaborate
                     </Badge>
                     <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-8 text-white brand-heading leading-tight">
-                        See SURO in Action
+                        Let's Build Something
                     </h2>
                     <p className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Experience how <span className="text-white font-semibold">real-time governance</span> transforms AI adoption from risky to trustworthy.
+                        I built SURO to show what <span className="text-white font-semibold">principled AI governance</span> could look like at scale. If you're working on something in this space — or just want to connect — I'd love to hear from you.
                     </p>
-                    <div className="flex flex-col items-center gap-4 w-full">
-                        <Link
-                            to="/contact"
-                            className="group bg-white text-black px-8 md:px-10 py-4 md:py-5 rounded-full text-base md:text-xl font-medium hover:bg-cyan-400 hover:text-black active:scale-95 transition-all flex items-center gap-2 shadow-2xl hover:shadow-cyan-500/20 w-full max-w-xs md:w-auto justify-center"
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+                        <a
+                            href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group bg-white text-black px-8 md:px-10 py-4 md:py-5 rounded-full text-base md:text-xl font-medium hover:bg-cyan-400 hover:text-black active:scale-95 transition-all flex items-center gap-2 shadow-2xl hover:shadow-cyan-500/20 w-full max-w-xs sm:w-auto justify-center"
                         >
-                            Book Enterprise Demo <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                        <span className="font-mono text-[9px] text-gray-600 tracking-[0.3em] uppercase mt-2">
-                            ALL GOVERNANCE PATHS CONVERGE HERE
-                        </span>
+                            Connect on LinkedIn <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                        </a>
+                        <a
+                            href="mailto:suhaybshaik@outlook.com"
+                            className="group flex items-center gap-2 text-white/50 hover:text-white active:text-cyan-400 transition-colors text-sm py-4 px-2"
+                        >
+                            <span className="font-mono text-[11px] uppercase tracking-[0.3em]">Or send an email</span>
+                        </a>
                     </div>
                 </div>
             </section>
