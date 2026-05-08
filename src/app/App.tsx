@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { LandingPage } from "./pages/LandingPage";
-import { DashboardPage } from "./pages/DashboardPage";
-import { AboutPage } from "./pages/AboutPage";
-import { ContactPage } from "./pages/ContactPage";
-import { SandboxPage } from "./pages/SandboxPage";
-import { RiskCalculatorPage } from "./pages/RiskCalculatorPage";
-import { TrustCenterPage } from "./pages/TrustCenterPage";
-import { StandardsPage } from "./pages/StandardsPage";
-import { PricingPage } from "./pages/PricingPage";
+
+// Lazy load pages for performance
+const LandingPage = lazy(() => import("./pages/LandingPage").then(m => ({ default: m.LandingPage })));
+const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
+const AboutPage = lazy(() => import("./pages/AboutPage").then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import("./pages/ContactPage").then(m => ({ default: m.ContactPage })));
+const SandboxPage = lazy(() => import("./pages/SandboxPage").then(m => ({ default: m.SandboxPage })));
+const RiskCalculatorPage = lazy(() => import("./pages/RiskCalculatorPage").then(m => ({ default: m.RiskCalculatorPage })));
+const TrustCenterPage = lazy(() => import("./pages/TrustCenterPage").then(m => ({ default: m.TrustCenterPage })));
+const StandardsPage = lazy(() => import("./pages/StandardsPage").then(m => ({ default: m.StandardsPage })));
+const PricingPage = lazy(() => import("./pages/PricingPage").then(m => ({ default: m.PricingPage })));
+
 import { Atmosphere } from "./components/ui/Atmosphere";
 import { GovernanceLens } from "./components/ui/GovernanceLens";
 import { SpeederLoader } from "./components/ui/SpeederLoader";
@@ -56,17 +59,19 @@ export default function App() {
 
       <GovernanceLens>
         <Atmosphere>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/sandbox" element={<SandboxPage />} />
-            <Route path="/calculator" element={<RiskCalculatorPage />} />
-            <Route path="/trust" element={<TrustCenterPage />} />
-            <Route path="/standards" element={<StandardsPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-          </Routes>
+          <Suspense fallback={<SpeederLoader />}>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/sandbox" element={<SandboxPage />} />
+              <Route path="/calculator" element={<RiskCalculatorPage />} />
+              <Route path="/trust" element={<TrustCenterPage />} />
+              <Route path="/standards" element={<StandardsPage />} />
+              <Route path="/pricing" element={<PricingPage />} />
+            </Routes>
+          </Suspense>
         </Atmosphere>
       </GovernanceLens>
     </Router>

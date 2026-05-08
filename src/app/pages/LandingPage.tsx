@@ -89,7 +89,7 @@ export function LandingPage() {
                         loop
                         muted
                         playsInline
-                        preload="auto"
+                        preload="metadata"
                         className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1] brightness-[0.8]"
                         style={{ transform: "translateZ(0)" }}
                     />
