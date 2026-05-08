@@ -1,20 +1,22 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { TrendingUp, TrendingDown, Shield, AlertTriangle, Ban, CheckCircle, Activity } from "lucide-react";
-import { mockMetrics, mockUsageTrends } from "./mock-data";
+import { mockMetrics, mockUsageTrends, mockEvents } from "./mock-data";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { GovernanceScoreGauge } from "./governance-score-gauge";
 import type { AIEvent } from "./types";
+import { toast } from "sonner";
 
 interface DashboardViewProps {
   timeFilter: string;
   onEventClick: (event: AIEvent) => void;
 }
 
-export function DashboardView({ timeFilter }: DashboardViewProps) {
+export function DashboardView({ timeFilter, onEventClick }: DashboardViewProps) {
   const metrics = mockMetrics;
 
   const kpiCards = [
     {
+      id: "total",
       title: "Total AI Requests",
       value: metrics.total_requests.toLocaleString(),
       change: metrics.total_requests_change,
@@ -22,6 +24,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       description: "Last 7 days"
     },
     {
+      id: "allowed",
       title: "Allowed Requests",
       value: metrics.allowed_count.toLocaleString(),
       change: 8.2,
@@ -30,6 +33,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       color: "text-green-600"
     },
     {
+      id: "flagged",
       title: "Flagged for Review",
       value: metrics.flagged_count.toLocaleString(),
       change: 15.3,
@@ -38,48 +42,61 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       color: "text-amber-600"
     },
     {
+      id: "blocked",
       title: "Blocked Requests",
       value: metrics.blocked_count.toLocaleString(),
       change: -5.4,
       icon: Ban,
       description: `${((metrics.blocked_count / metrics.total_requests) * 100).toFixed(1)}% of total`,
-      color: "text-red-600"
-    },
-    {
-      title: "Active Policies",
-      value: metrics.active_policies.toString(),
-      change: metrics.active_policies_change,
-      icon: Shield,
-      description: "Enforcement rules"
-    },
-    {
-      title: "Shadow AI Incidents",
-      value: metrics.shadow_ai_incidents.toString(),
-      change: metrics.shadow_ai_incidents_change,
-      icon: AlertTriangle,
-      description: "Unauthorized tools detected",
-      color: "text-amber-600"
+      color: "text-red-100" // Specific red for visibility
     }
   ];
+
+  const handleCardClick = (id: string) => {
+    let relevantEvent: AIEvent | undefined;
+
+    switch (id) {
+      case "allowed":
+        relevantEvent = mockEvents.find(e => e.decision === "Allowed");
+        break;
+      case "flagged":
+        relevantEvent = mockEvents.find(e => e.decision === "Flagged");
+        break;
+      case "blocked":
+        relevantEvent = mockEvents.find(e => e.decision === "Blocked");
+        break;
+      default:
+        relevantEvent = mockEvents[0];
+    }
+
+    if (relevantEvent) {
+      onEventClick(relevantEvent);
+      toast.info(`Viewing ${id} request details`);
+    }
+  };
 
   return (
     <div className="space-y-4">
       {/* Executive Overview Cards */}
       <div>
         <h2 className="text-2xl font-bold mb-4">Executive Overview</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {kpiCards.map((card, index) => {
             const Icon = card.icon;
             const isPositive = card.change > 0;
 
             return (
-              <Card key={index} className="cursor-pointer hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="cursor-pointer hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] border-primary/10"
+                onClick={() => handleCardClick(card.id)}
+              >
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 p-3 pb-1">
                   <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
                   <Icon className={`w-4 h-4 ${card.color || 'text-muted-foreground'}`} />
                 </CardHeader>
                 <CardContent className="p-3 pt-1">
-                  <div className={`text-2xl mb-1 ${card.color || ''}`}>{card.value}</div>
+                  <div className={`text-2xl font-bold mb-1`}>{card.value}</div>
                   <div className="flex items-center gap-2">
                     <span className={`text-xs flex items-center gap-1 ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
                       {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
@@ -98,7 +115,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>AI Governance Score</CardTitle>
+            <CardTitle className="font-playfair text-xl">AI Governance Score</CardTitle>
             <CardDescription>Based on policy compliance & Shadow AI exposure</CardDescription>
           </CardHeader>
           <CardContent className="flex items-center justify-center pt-6">
@@ -108,7 +125,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
 
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Overall AI Risk Level</CardTitle>
+            <CardTitle className="font-playfair text-xl">Overall AI Risk Level</CardTitle>
             <CardDescription>Aggregated risk assessment across all AI activities</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -142,7 +159,7 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
       {/* AI Usage Trends */}
       <Card>
         <CardHeader>
-          <CardTitle>AI Usage Trends</CardTitle>
+          <CardTitle className="font-playfair text-xl">AI Usage Trends</CardTitle>
           <CardDescription>AI requests over time, color-coded by decision</CardDescription>
         </CardHeader>
         <CardContent className="p-4">
@@ -201,3 +218,4 @@ export function DashboardView({ timeFilter }: DashboardViewProps) {
     </div>
   );
 }
+

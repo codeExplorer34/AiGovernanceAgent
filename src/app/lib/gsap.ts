@@ -17,3 +17,4 @@ export function registerGsap() {
 
 export { gsap, ScrollTrigger };
 
+

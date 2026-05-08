@@ -7,7 +7,7 @@ const steps = [
         icon: <Zap className="w-5 h-5" />,
         label: "INGRESS",
         title: "Prompt Interception",
-        desc: "The second a prompt is sent, AEGIS traps the packet at the gateway level.",
+        desc: "The second a prompt is sent, SURO traps the packet at the gateway level.",
         color: "text-blue-400",
         borderColor: "border-blue-500/20",
         bgColor: "bg-blue-500/5"
@@ -150,3 +150,4 @@ export function AuditTrailSection() {
         </section>
     );
 }
+

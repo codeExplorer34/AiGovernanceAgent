@@ -225,3 +225,47 @@ img {
     display: inline-block;
     margin-top: 0.15em;
 }
+
+/* ═══════════════ CINEMATIC GOVERNANCE CSS ═══════════════ */
+
+/*
+ * Global Motion Standard
+ * ─────────────────────────────────────────
+ * Microinteractions : 250–300ms
+ * Section transitions: 600–800ms
+ * Scroll-driven     : linear (none)
+ * Hover states       : ease-out
+ * Never bounce. Never elastic.
+ */
+
+/* CTA Emerald Glow — smooth, no sharp pop */
+.cta-glow {
+    position: relative;
+    transition: box-shadow 300ms ease-out, border-color 300ms ease-out;
+}
+
+.cta-glow:hover {
+    box-shadow:
+        0 0 20px rgba(16, 185, 129, 0.2),
+        0 0 40px rgba(16, 185, 129, 0.08);
+}
+
+/* Inner border trace animation */
+.cta-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    transition: border-color 300ms linear;
+    pointer-events: none;
+}
+
+.cta-glow:hover::after {
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+/* Scroll indicator */
+.hero-scroll-indicator {
+    transition: opacity 600ms ease-out;
+}

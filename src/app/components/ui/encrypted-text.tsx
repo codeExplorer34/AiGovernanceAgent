@@ -58,8 +58,12 @@ export const EncryptedText = ({
     }, [text, characters, duration, speed, isInView]);
 
     return (
-        <span ref={containerRef} className={`inline-block font-mono ${className}`}>
-            {displayText || text.split("").map(c => c === " " ? " " : characters[Math.floor(Math.random() * characters.length)]).join("")}
+        <span
+            ref={containerRef}
+            className={`inline-block font-mono transition-opacity duration-300 ${className} ${!isInView ? "opacity-0" : "opacity-100"}`}
+        >
+            {displayText || text}
         </span>
     );
 };
+

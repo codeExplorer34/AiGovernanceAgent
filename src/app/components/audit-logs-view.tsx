@@ -13,18 +13,23 @@ import {
 } from "./ui/table";
 import { mockEvents } from "./mock-data";
 import { formatDistanceToNow } from "date-fns";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function AuditLogsView() {
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl">Audit Logs</h2>
-        <div className="flex items-center gap-2">
-          <Button variant="outline">
+        <h2 className="text-2xl font-bold">Audit Logs</h2>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => toast.info("Advanced filter modal opening...")}>
             <Filter className="w-4 h-4 mr-2" />
             Filters
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => toast.info("Exporting audit logs as CSV...")}>
             <Download className="w-4 h-4 mr-2" />
             Export
           </Button>
@@ -84,14 +89,20 @@ export function AuditLogsView() {
                   <TableCell>
                     <Badge className={
                       event.decision === "Allowed" ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" :
-                      event.decision === "Flagged" ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200" :
-                      "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                        event.decision === "Flagged" ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200" :
+                          "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
                     }>
                       {event.decision}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline" size="sm">View</Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toast.info(`Accessing secure audit details for ${event.event_id}`)}
+                    >
+                      View
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -137,13 +148,13 @@ export function AuditLogsView() {
             <CardTitle>Compliance Reporting</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            <Button variant="outline" className="w-full justify-start">
+            <Button variant="outline" className="w-full justify-start" onClick={() => toast.success("GDPR Compliance Report generation started...")}>
               Generate GDPR Report
             </Button>
-            <Button variant="outline" className="w-full justify-start">
+            <Button variant="outline" className="w-full justify-start" onClick={() => toast.success("SOX Compliance Report generation started...")}>
               Generate SOX Report
             </Button>
-            <Button variant="outline" className="w-full justify-start">
+            <Button variant="outline" className="w-full justify-start" onClick={() => toast.success("HIPAA Compliance Report generation started...")}>
               Generate HIPAA Report
             </Button>
           </CardContent>
@@ -152,3 +163,4 @@ export function AuditLogsView() {
     </div>
   );
 }
+

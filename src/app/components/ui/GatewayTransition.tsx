@@ -91,3 +91,4 @@ export const GatewayTransition: React.FC<GatewayTransitionProps> = ({ isActive, 
         </AnimatePresence>
     );
 };
+

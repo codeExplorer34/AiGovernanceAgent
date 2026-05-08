@@ -13,6 +13,7 @@ import { Eye, AlertTriangle, CheckCircle, Clock } from "lucide-react";
 import { mockShadowAI } from "./mock-data";
 import type { AIEvent, RiskLevel, ShadowAIStatus } from "./types";
 import { formatDistanceToNow } from "date-fns";
+import { toast } from "sonner";
 
 interface ShadowAIViewProps {
   onEventClick: (event: AIEvent) => void;
@@ -58,7 +59,7 @@ export function ShadowAIView({ onEventClick }: ShadowAIViewProps) {
                   New Shadow AI Detected
                 </h4>
                 <p className="text-sm text-amber-800 dark:text-amber-300 mt-1">
-                  {newDetections} new unauthorized AI {newDetections === 1 ? 'tool has' : 'tools have'} been detected in your environment. 
+                  {newDetections} new unauthorized AI {newDetections === 1 ? 'tool has' : 'tools have'} been detected in your environment.
                   Review and approve or block these tools to maintain governance.
                 </p>
               </div>
@@ -133,7 +134,7 @@ export function ShadowAIView({ onEventClick }: ShadowAIViewProps) {
             </TableHeader>
             <TableBody>
               {mockShadowAI.map((detection) => (
-                <TableRow 
+                <TableRow
                   key={detection.detection_id}
                   className="hover:bg-muted/50"
                 >
@@ -168,21 +169,47 @@ export function ShadowAIView({ onEventClick }: ShadowAIViewProps) {
                     <div className="flex items-center gap-2">
                       {detection.status === "Unapproved" && (
                         <>
-                          <Button variant="outline" size="sm" className="text-green-600">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="text-green-600"
+                            onClick={() => {
+                              toast.success(`Access to ${detection.tool_name} has been approved for ${detection.user}`);
+                            }}
+                          >
                             Approve
                           </Button>
-                          <Button variant="outline" size="sm" className="text-red-600">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="text-red-600"
+                            onClick={() => {
+                              toast.error(`Access to ${detection.tool_name} has been permanently blocked globally.`);
+                            }}
+                          >
                             Block
                           </Button>
                         </>
                       )}
                       {detection.status === "Under Review" && (
-                        <Button variant="outline" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            toast.info(`Opening compliance review for ${detection.tool_name}...`);
+                          }}
+                        >
                           Review
                         </Button>
                       )}
                       {detection.status === "Approved" && (
-                        <Button variant="outline" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            toast.info(`Viewing security audit for ${detection.tool_name}`);
+                          }}
+                        >
                           Details
                         </Button>
                       )}
@@ -202,7 +229,7 @@ export function ShadowAIView({ onEventClick }: ShadowAIViewProps) {
         </CardHeader>
         <CardContent className="space-y-2">
           <p className="text-sm">
-            Shadow AI refers to AI tools and services used within your organization without proper governance oversight. 
+            Shadow AI refers to AI tools and services used within your organization without proper governance oversight.
             These tools can pose significant risks including:
           </p>
           <ul className="text-sm space-y-1 list-disc list-inside text-muted-foreground">
@@ -216,3 +243,4 @@ export function ShadowAIView({ onEventClick }: ShadowAIViewProps) {
     </div>
   );
 }
+

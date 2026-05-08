@@ -59,3 +59,4 @@ export function GovernanceScoreGauge({ score }: GovernanceScoreGaugeProps) {
     </div>
   );
 }
+

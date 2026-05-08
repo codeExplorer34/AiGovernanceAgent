@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Switch } from "./ui/switch";
 import { Separator } from "./ui/separator";
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -12,13 +12,21 @@ import {
   SelectValue,
 } from "./ui/select";
 
+import { toast } from "sonner";
+
 export function SettingsView() {
+  const handleSave = () => {
+    toast.success("Settings updated successfully", {
+      description: "Governance configurations have been synced globally."
+    });
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
         <h2 className="text-2xl mb-1">Settings</h2>
         <p className="text-sm text-muted-foreground">
-          Configure AEGIS AI Governance platform settings
+          Configure SURO AI Governance platform settings
         </p>
       </div>
 
@@ -121,7 +129,7 @@ export function SettingsView() {
       <Card>
         <CardHeader>
           <CardTitle>Integrations</CardTitle>
-          <CardDescription>Connect AEGIS with your existing systems</CardDescription>
+          <CardDescription>Connect SURO with your existing systems</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
@@ -131,7 +139,7 @@ export function SettingsView() {
                 Forward events to Security Information and Event Management system
               </p>
             </div>
-            <Button variant="outline">Configure</Button>
+            <Button variant="outline" onClick={() => toast.info("Opening SIEM integration wizard...")}>Configure</Button>
           </div>
 
           <Separator />
@@ -143,7 +151,7 @@ export function SettingsView() {
                 Send alerts to designated Slack channels
               </p>
             </div>
-            <Button variant="outline">Connect</Button>
+            <Button variant="outline" onClick={() => toast.info("Authenticating with Slack...")}>Connect</Button>
           </div>
 
           <Separator />
@@ -155,7 +163,7 @@ export function SettingsView() {
                 Generate API keys for programmatic access
               </p>
             </div>
-            <Button variant="outline">Manage Keys</Button>
+            <Button variant="outline" onClick={() => toast.info("Loading secure key vault...")}>Manage Keys</Button>
           </div>
         </CardContent>
       </Card>
@@ -190,9 +198,10 @@ export function SettingsView() {
 
       {/* Save Button */}
       <div className="flex justify-end gap-2">
-        <Button variant="outline">Cancel</Button>
-        <Button>Save Changes</Button>
+        <Button variant="outline" onClick={() => toast.info("Changes discarded")}>Cancel</Button>
+        <Button onClick={handleSave}>Save Changes</Button>
       </div>
     </div>
   );
 }
+

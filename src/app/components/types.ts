@@ -53,3 +53,4 @@ export interface DashboardMetrics {
   overall_risk: RiskLevel;
   governance_score: number;
 }
+

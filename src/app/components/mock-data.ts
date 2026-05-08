@@ -1,7 +1,7 @@
 /**
- * AEGIS AI Governance Platform - Mock Data
+ * SURO AI Governance Platform - Mock Data
  * 
- * This file contains mock data structures and sample data for the AEGIS dashboard.
+ * This file contains mock data structures and sample data for the SURO dashboard.
  * 
  * BACKEND INTEGRATION GUIDE:
  * 

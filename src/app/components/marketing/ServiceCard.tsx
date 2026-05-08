@@ -6,17 +6,18 @@ interface ServiceCardProps {
     title: string;
     subtitle: string;
     description: string;
+    className?: string;
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle, description }) => {
+export function ServiceCard({ icon, title, subtitle, description, className = "" }: ServiceCardProps) {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
     const mouseXSpring = useSpring(x);
     const mouseYSpring = useSpring(y);
 
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["4deg", "-4deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-4deg", "4deg"]);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -48,7 +49,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle,
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-colors overflow-hidden cursor-none shadow-[inset_0_1px_10px_rgba(0,0,0,0.5)] border-t-white/20"
+            className="group relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-emerald-500/30 transition-all duration-300 overflow-hidden cursor-none shadow-[inset_0_1px_10px_rgba(0,0,0,0.5)] border-t-white/20 hover:shadow-[inset_0_1px_10px_rgba(0,0,0,0.5),0_8px_32px_rgba(16,185,129,0.08)]"
         >
             {/* Dynamic Shine Layer */}
             <motion.div
@@ -79,3 +80,4 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, subtitle,
         </motion.div>
     );
 };
+

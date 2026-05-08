@@ -114,7 +114,7 @@ export function ChipScroll() {
             <div className="h-screen w-full flex items-center justify-center bg-black">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mb-4 mx-auto"></div>
-                    <p className="text-gray-400 text-lg">Loading AEGIS Core...</p>
+                    <p className="text-gray-400 text-lg">Loading SURO Core...</p>
                     <p className="text-gray-500 text-sm mt-2">240 governance layers</p>
                 </div>
             </div>
@@ -150,7 +150,7 @@ export function ChipScroll() {
                         className="absolute text-center"
                     >
                         <h1 className="text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 drop-shadow-2xl" style={{ fontFamily: "var(--font-display)" }}>
-                            AEGIS
+                            SURO
                         </h1>
                         <p className="text-3xl text-white/80 drop-shadow-lg" style={{ fontFamily: "var(--font-serif)", fontStyle: "italic" }}>
                             Governance, Built Into the Core.
@@ -231,3 +231,4 @@ export function ChipScroll() {
         </div>
     );
 }
+

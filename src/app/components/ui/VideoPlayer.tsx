@@ -86,3 +86,4 @@ export function VideoPlayer({ src, poster, autoPlay = false, className = "" }: V
         </motion.div>
     );
 }
+

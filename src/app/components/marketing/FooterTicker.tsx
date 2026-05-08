@@ -50,3 +50,4 @@ export const FooterTicker: React.FC = () => {
         </div>
     );
 };
+

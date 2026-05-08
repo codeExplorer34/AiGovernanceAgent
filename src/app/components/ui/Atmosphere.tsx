@@ -35,3 +35,4 @@ export function Atmosphere({ children }: { children: React.ReactNode }) {
         </div>
     );
 }
+

@@ -84,7 +84,7 @@ export function ProductVideoSection() {
                                 <br />Enterprise AI
                             </h2>
                             <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
-                                AEGIS sits between your users and your models, ensuring every interaction is governed, audited, and secured in real-time.
+                                SURO sits between your users and your models, ensuring every interaction is governed, audited, and secured in real-time.
                             </p>
                         </motion.div>
 
@@ -110,7 +110,7 @@ export function ProductVideoSection() {
                         </div>
                     </div>
 
-                    {/* Right: Live View — AEGIS Console Chrome */}
+                    {/* Right: Live View — SURO Console Chrome */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export function ProductVideoSection() {
                                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
                                         <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
                                     </div>
-                                    <span className="font-mono text-[9px] text-gray-500 tracking-[0.2em] uppercase ml-2">AEGIS CONSOLE // PROTOCOL_ID: AEGIS-001</span>
+                                    <span className="font-mono text-[9px] text-gray-500 tracking-[0.2em] uppercase ml-2">SURO CONSOLE // PROTOCOL_ID: SURO-001</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -142,7 +142,7 @@ export function ProductVideoSection() {
                                 <div className="absolute inset-0 rounded-b-xl z-20 pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.6)]" />
 
                                 <VideoPlayer
-                                    src="/Videos/Dashboard Video Aegis.mp4"
+                                    src="/Videos/Dashboard Video SURO.mp4"
                                     autoPlay={true}
                                     className="aspect-video w-full"
                                 />
@@ -168,3 +168,4 @@ export function ProductVideoSection() {
         </section>
     );
 }
+

@@ -200,3 +200,4 @@ export function AIActivityView({ searchQuery, timeFilter, onEventClick }: AIActi
     </div>
   );
 }
+

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Shield, Twitter, Linkedin, Github } from "lucide-react";
+import { Twitter, Linkedin, Github } from "lucide-react";
+import { ShieldStreamIcon } from "../ui/CustomIcons";
 import { FooterTicker } from "./FooterTicker";
 
 export function Footer() {
@@ -11,22 +12,19 @@ export function Footer() {
                     {/* Brand */}
                     <div className="col-span-1">
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-                                <Shield className="w-5 h-5 text-white" />
+                            <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center">
+                                <ShieldStreamIcon className="w-5 h-5 text-cyan-400" />
                             </div>
-                            <span className="text-white font-bold text-lg">AEGIS</span>
+                            <span className="text-white font-bold text-lg">SURO</span>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             AI Governance Agent for Safe, Compliant AI Adoption
                         </p>
                         <div className="flex items-center gap-4 mt-6">
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                                <Twitter className="w-5 h-5" />
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                            <a href="https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/" className="text-gray-400 hover:text-white transition-colors">
                                 <Linkedin className="w-5 h-5" />
                             </a>
-                            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                            <a href="https://github.com/codeExplorer34" className="text-gray-400 hover:text-white transition-colors">
                                 <Github className="w-5 h-5" />
                             </a>
                         </div>
@@ -51,6 +49,16 @@ export function Footer() {
                                     Dashboard
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/trust" className="text-gray-400 hover:text-white transition-colors text-sm">
+                                    Trust Center
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/standards" className="text-gray-400 hover:text-white transition-colors text-sm">
+                                    Technical Standards
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
@@ -59,12 +67,12 @@ export function Footer() {
                         <h3 className="text-white font-semibold mb-4 brand-heading">Support</h3>
                         <ul className="space-y-3">
                             <li>
-                                <a href="mailto:support@aegis.ai" className="text-gray-400 hover:text-white transition-colors text-sm">
+                                <a href="mailto:suhaybshaik@outlook.com" className="text-gray-400 hover:text-white transition-colors text-sm">
                                     Help Center
                                 </a>
                             </li>
                             <li>
-                                <a href="mailto:founders@aegis.ai" className="text-gray-400 hover:text-white transition-colors text-sm">
+                                <a href="mailto:suhaybshaik@outlook.com" className="text-gray-400 hover:text-white transition-colors text-sm">
                                     Contact Founders
                                 </a>
                             </li>
@@ -83,7 +91,7 @@ export function Footer() {
                                 placeholder="Enter your email"
                                 className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-purple-600"
                             />
-                            <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all">
+                            <button className="bg-white hover:bg-cyan-400 text-black px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
                                 Subscribe
                             </button>
                         </div>
@@ -93,7 +101,7 @@ export function Footer() {
                 {/* Bottom */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 mb-12">
                     <p className="text-gray-400 text-sm">
-                        © 2025 AEGIS. All rights reserved.
+                        © 2026 SURO. All rights reserved.
                     </p>
                     <div className="flex items-center gap-6">
                         <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
@@ -124,3 +132,4 @@ export function Footer() {
 }
 
 // Add marquee style to tailwind if needed or handle via CSS
+

@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Badge } from "./Badge";
 import { Shield, Zap, Eye, CheckCircle, Sparkles } from "lucide-react";
 import ScrollStack, { ScrollStackItem } from "../ui/ScrollStack";
@@ -15,14 +16,14 @@ const steps: ProcessStep[] = [
     {
         title: "The Ingress",
         label: "RAW_DATA_ENTRY",
-        description: "High-velocity data streams enter the perimeter. AEGIS immediately traps the packet at the gateway level for surgical inspection.",
+        description: "High-velocity data streams enter the perimeter. SURO immediately traps the packet at the gateway level for surgical inspection.",
         image: "/images/generated-image.png",
         icon: <Zap className="w-5 h-5 text-orange-400" />
     },
     {
         title: "Neural Analysis",
         label: "AI_AUDIT_SCAN",
-        description: "AEGIS Neural Enforcers perform a deep-packet scan in under 180ms, identifying PII, sensitive credentials, and policy violations.",
+        description: "SURO Neural Enforcers perform a deep-packet scan in under 180ms, identifying PII, sensitive credentials, and policy violations.",
         image: "/images/generated-image 2.png",
         icon: <Eye className="w-5 h-5 text-blue-400" />
     },
@@ -48,13 +49,26 @@ export const ProcessJourney: React.FC = () => {
             <div className="max-w-7xl mx-auto px-8 relative">
                 {/* Section Header */}
                 <div className="text-center mb-20">
-                    <Badge icon={<Sparkles className="w-4 h-4 text-purple-400" />}>The AEGIS Lifecycle</Badge>
+                    <Badge icon={<Sparkles className="w-4 h-4 text-purple-400" />}>The SURO Lifecycle</Badge>
                     <h2 className="text-5xl md:text-7xl font-bold mt-6 brand-heading">
                         Discover The Process <br /> <span className="text-white">Behind The Safety.</span>
                     </h2>
                 </div>
 
-                <div className="relative">
+                <div className="relative flex">
+                    {/* Vertical Timeline Progress */}
+                    <div className="hidden lg:flex flex-col items-center mr-12 py-10">
+                        <div className="w-px h-full bg-white/10 relative">
+                            <motion.div
+                                className="absolute top-0 left-1/2 -translate-x-1/2 w-1 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]"
+                                style={{ height: "100%" }}
+                                initial={{ height: 0 }}
+                                whileInView={{ height: "100%" }}
+                                transition={{ duration: 4, ease: "easeInOut" }}
+                            />
+                        </div>
+                    </div>
+
                     <ScrollStack
                         itemDistance={100}
                         itemScale={0.05}
@@ -66,7 +80,7 @@ export const ProcessJourney: React.FC = () => {
                     >
                         {steps.map((step, index) => (
                             <ScrollStackItem key={index}>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 h-full bg-[#0a0a0a] border border-white/10 overflow-hidden group">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 h-full bg-white/[0.03] backdrop-blur-xl border border-white/10 overflow-hidden group rounded-2xl">
                                     {/* Image Side */}
                                     <div className="relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/5">
                                         <img
@@ -105,12 +119,12 @@ export const ProcessJourney: React.FC = () => {
 
                                         <div className="pt-8 border-t border-white/5">
                                             <div className="flex flex-wrap gap-4">
-                                                <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500">
-                                                    <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+                                                <div className="flex items-center gap-3 px-3 py-1.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-400">
+                                                    <Zap className="w-3 h-3 animate-pulse" />
                                                     LATENCY: {'<'}180ms
                                                 </div>
-                                                <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500">
-                                                    <div className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+                                                <div className="flex items-center gap-3 px-3 py-1.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-[10px] font-mono text-cyan-400">
+                                                    <Shield className="w-3 h-3" />
                                                     SECURITY: MIL_SPEC
                                                 </div>
                                             </div>
@@ -125,3 +139,4 @@ export const ProcessJourney: React.FC = () => {
         </section>
     );
 };
+

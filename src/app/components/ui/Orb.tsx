@@ -339,3 +339,4 @@ function hexToVec3(color) {
 
     return new Vec3(0, 0, 0);
 }
+

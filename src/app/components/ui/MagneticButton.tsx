@@ -31,7 +31,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
             // Calculate distance from center
             const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-            const maxDistance = 100; // Activation radius in pixels
+            const maxDistance = 60; // Reduced activation radius
 
             if (distance < maxDistance) {
                 // Apply magnetic effect
@@ -53,8 +53,8 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
             gsap.to(button, {
                 x: 0,
                 y: 0,
-                duration: 0.5,
-                ease: 'elastic.out(1, 0.3)'
+                duration: 0.4,
+                ease: 'power2.out'
             });
         };
 
@@ -77,3 +77,4 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
         </button>
     );
 };
+

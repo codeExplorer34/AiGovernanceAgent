@@ -29,7 +29,7 @@ export function ComparisonLens() {
                     The Governance Lens
                 </h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                    Drag the slider to see how AEGIS physically transforms raw, high-risk data into governed intelligence in real-time.
+                    Drag the slider to see how SURO physically transforms raw, high-risk data into governed intelligence in real-time.
                 </p>
             </div>
 
@@ -67,7 +67,7 @@ export function ComparisonLens() {
                     <div className="space-y-6">
                         <div className="flex items-center gap-3 text-emerald-500 mb-8">
                             <Shield className="w-5 h-5" />
-                            <span className="text-xs font-bold font-mono tracking-[0.4em] uppercase">AEGIS_ENFORCEMENT_LOCK</span>
+                            <span className="text-xs font-bold font-mono tracking-[0.4em] uppercase">SURO_ENFORCEMENT_LOCK</span>
                         </div>
                         {rawData.map((item, i) => (
                             <div key={i} className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/10 font-mono text-sm shadow-[inset_0_1px_10px_rgba(16,185,129,0.05)]">
@@ -119,3 +119,4 @@ export function ComparisonLens() {
         </section>
     );
 }
+

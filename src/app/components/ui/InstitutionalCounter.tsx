@@ -10,7 +10,7 @@ export const InstitutionalCounter: React.FC = () => {
     const [statusIndex, setStatusIndex] = useState(0);
 
     const statuses = [
-        "BOOTING_AEGIS_KERNEL_v2.1",
+        "BOOTING_SURO_KERNEL_v2.1",
         "ESTABLISHING_TLS_HANDSHAKE",
         "DECRYPTING_POLICY_LEDGER",
         "SYNCING_CROSS_DOMAIN_NODES",
@@ -134,7 +134,7 @@ export const InstitutionalCounter: React.FC = () => {
                                 <Shield className="w-5 h-5 text-gray-500 -rotate-45" />
                             </div>
                             <span className="text-[9px] font-mono text-gray-600 tracking-[0.5em] uppercase">
-                                AEGIS_SECURITY_CLEARANCE_REQUIRED
+                                SURO_SECURITY_CLEARANCE_REQUIRED
                             </span>
                         </div>
                     </div>
@@ -143,3 +143,4 @@ export const InstitutionalCounter: React.FC = () => {
         </AnimatePresence>
     );
 };
+

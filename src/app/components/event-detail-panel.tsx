@@ -175,3 +175,4 @@ export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
     </div>
   );
 }
+

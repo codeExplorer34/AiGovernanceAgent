@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger
 } from "./ui/dropdown-menu";
 import { useTheme } from "./theme-provider";
+import { toast } from "sonner";
 
 interface TopBarProps {
   timeFilter: string;
@@ -97,12 +98,22 @@ export function TopBar({ timeFilter, onTimeFilterChange, searchQuery, onSearchCh
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Preferences</DropdownMenuItem>
-            <DropdownMenuItem>Sign Out</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => toast.info("Opening user profile settings...")}>
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => toast.info("Security and interface preferences loading...")}>
+              Preferences
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-red-600"
+              onClick={() => toast.warning("Session termination requested...")}
+            >
+              Sign Out
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
     </header>
   );
 }
+

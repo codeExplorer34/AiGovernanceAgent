@@ -1,12 +1,12 @@
 Product Requirements Document (PRD)
 Product Name
-AEGIS – AI Governance Agent
+SURO – AI Governance Agent
 Document Purpose
-This PRD serves as the single source of truth for building AEGIS. It should be referenced whenever there is
+This PRD serves as the single source of truth for building SURO. It should be referenced whenever there is
 confusion, scope creep, or design/engineering trade-offs. Any feature, UI, or architectural decision must
 align with the goals, principles, and requirements defined here.
 1. Product Vision
-AEGIS exists to ensure that AI adoption in enterprises is safe, compliant, explainable, and controllable
+SURO exists to ensure that AI adoption in enterprises is safe, compliant, explainable, and controllable
 by design.
 The product transforms AI governance from: - Static policies → Living, enforceable systems - Manual
 audits → Continuous oversight - Reactive compliance → Proactive risk prevention
@@ -38,7 +38,7 @@ Product Goals
 • Generate audit-ready explanations for every decision
 • Reduce manual compliance effort
 Success Metrics (KPIs)
-• % of AI requests evaluated through AEGIS
+• % of AI requests evaluated through SURO
 • Number of Shadow AI events detected
 • Reduction in audit preparation time
 • Policy violations prevented before data exposure
@@ -93,7 +93,7 @@ Design Principle: Clarity > density. Executives should understand risk in <30 se
 • Database: PostgreSQL (SQLite for demo)
 • Logging: Immutable governance event logs
 9. Out of Scope (Explicit)
-To avoid scope creep, the following are not part of AEGIS v1: - AI model training or fine-tuning - Bias
+To avoid scope creep, the following are not part of SURO v1: - AI model training or fine-tuning - Bias
 detection inside model outputs - Prompt engineering assistance - Automated remediation actions
 10. Risks & Mitigations
 Risk: Product becomes "just logging" - Mitigation: Enforce real-time blocking and context-aware rules
@@ -110,4 +110,4 @@ A feature is considered complete only if: - It enforces or improves governance -
 technical auditor - It aligns with the product principles - It reduces risk or compliance effort
 Final Reminder
 If a feature does not: - Improve visibility - Improve control - Improve explainability
-It does not belong in AEGIS
+It does not belong in SURO

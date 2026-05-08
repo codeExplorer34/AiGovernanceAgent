@@ -29,7 +29,7 @@ export function Sidebar({ currentView, onNavigate, isCollapsed, onToggleCollapse
           "transition-all duration-300",
           isCollapsed ? "opacity-0 invisible w-0" : "opacity-100 visible w-auto"
         )}>
-          <h1 className="font-bold text-xl tracking-tighter text-foreground">AEGIS</h1>
+          <h1 className="font-bold text-xl tracking-tighter text-foreground">SURO</h1>
           <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-semibold">Governance Control</p>
         </div>
         <button
@@ -97,10 +97,11 @@ export function Sidebar({ currentView, onNavigate, isCollapsed, onToggleCollapse
         )}>
           <div className="text-[10px] text-muted-foreground">
             <div>Version 2.1.0</div>
-            <div className="mt-1">© 2026 AEGIS AI</div>
+            <div className="mt-1">© 2026 SURO AI</div>
           </div>
         </div>
       </div>
     </aside>
   );
 }
+

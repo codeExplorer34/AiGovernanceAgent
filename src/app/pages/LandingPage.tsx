@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Navbar } from "../components/marketing/Navbar";
 import { Footer } from "../components/marketing/Footer";
@@ -8,151 +8,246 @@ import { ServiceCard } from "../components/marketing/ServiceCard";
 import { FlipWords } from "../components/ui/FlipWords";
 import { ProductVideoSection } from "../components/marketing/ProductVideoSection";
 import Aurora from "../components/ui/Aurora";
-import { Activity, Shield, Users, Sparkles, Eye, CheckCircle, AlertTriangle, Code, Clock, Globe, Download, TrendingDown, Zap, ArrowRight, ShieldCheck, FileSearch } from "lucide-react";
+import { ShieldStreamIcon, ScanEyeIcon, HexLockIcon, BoltNodesIcon, AuditDocIcon, TeamShieldIcon, MonitorPulseIcon } from "../components/ui/CustomIcons";
+import { Activity, Shield, Users, Sparkles, Eye, CheckCircle, AlertTriangle, Code, Clock, Globe, Download, TrendingDown, Zap, ArrowRight, ShieldCheck, FileSearch, PieChart } from "lucide-react";
 import CardSwap, { Card } from "../components/ui/CardSwap";
 import { AuditTrailSection } from "../components/marketing/AuditTrailSection";
 import { ComparisonLens } from "../components/marketing/ComparisonLens";
+import { StrategicDifferentiation } from "../components/marketing/StrategicDifferentiation";
 import { ProcessJourney } from "../components/marketing/ProcessJourney";
 import { ActiveGrid } from "../components/ui/ActiveGrid";
 import { TextDecrypt } from "../components/ui/TextDecrypt";
 import { KineticEnforcement } from "../components/marketing/KineticEnforcement";
-import { LandingIntroGate } from "../components/ui/LandingIntroGate";
 import { HeroHeadline } from "../components/ui/HeroHeadline";
 import { MagneticButton } from "../components/ui/MagneticButton";
-import { useNavigate } from "react-router-dom";
+import { ScrollRevealThesis } from "../components/marketing/ScrollRevealThesis";
+import { GovernanceTape } from "../components/marketing/GovernanceTape";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "../components/ui/scroll-based-velocity";
+import { useMotionValue, useSpring, useTransform } from "framer-motion";
+import { InfiniteDataStream } from "../components/ui/InfiniteDataStream";
+import { TextBreakdown } from "../components/ui/TextBreakdown";
+import { LiveGovernanceDemo } from "../components/marketing/LiveGovernanceDemo";
+import { ChapterProgress } from "../components/ui/ChapterProgress";
+import { SoundToggle } from "../components/ui/SoundToggle";
+import { useColorTransitions, useSceneTransitions } from "../hooks/useNarrativeTransitions";
+import { TypingText } from "../components/ui/TypingText";
+import { useSound } from "../components/ui/SoundProvider";
+import { TrustRibbon } from "../components/marketing/TrustRibbon";
+import { DeploymentSection } from "../components/marketing/DeploymentSection";
+
 
 export function LandingPage() {
     const navigate = useNavigate();
+    const videoRef = React.useRef<HTMLVideoElement>(null);
 
-    // Parallax effect for hero background
-    React.useEffect(() => {
-        const parallaxBg = document.querySelector('.hero-parallax-bg');
-        if (!parallaxBg) return;
 
-        const handleScroll = () => {
-            const scrolled = window.scrollY;
-            const parallaxSpeed = 0.5;
-            (parallaxBg as HTMLElement).style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-        };
+    // ── Mouse Parallax Logic ──
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
+    const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
+
+    const moveX = useTransform(springX, [0, 1], [-10, 10]);
+    const moveY = useTransform(springY, [0, 1], [-10, 10]);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        mouseX.set(clientX / innerWidth);
+        mouseY.set(clientY / innerHeight);
+    };
+
+    // ── Narrative Transitions ──
+    useColorTransitions();
+    useSceneTransitions();
 
     return (
-        <div className="relative min-h-screen bg-black text-white font-[Inter,sans-serif] z-[1]">
-            <LandingIntroGate />
+        <div
+            className="relative min-h-screen bg-black text-white font-['Playfair_Display',serif] z-[1]"
+            onMouseMove={handleMouseMove}
+        >
+            <InfiniteDataStream className="opacity-100" columnCount={12} speed={1.5} />
+            <ChapterProgress />
             <Navbar />
 
-            {/* Hero Section - Crystalline Governance */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                {/* Crystalline Background with Parallax */}
-                <div
-                    className="hero-parallax-bg absolute inset-0 z-0"
-                    style={{ willChange: 'transform' }}
-                >
-                    <img
-                        src="/images/hero-crystalline-governance.jpg"
-                        alt="AEGIS Governance Core"
-                        className="w-full h-full object-cover object-center scale-110"
+            {/* ═══════════════ CINEMATIC HERO ═══════════════ */}
+            <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                id="hero"
+                data-scene="introduction"
+                className="relative min-h-screen flex items-center overflow-hidden"
+            >
+                {/* LAYER 0: Background Video (Static Play) */}
+                <div className="absolute inset-0 z-0 select-none pointer-events-none transform-gpu" style={{ willChange: "transform" }}>
+                    <video
+                        ref={videoRef}
+                        src="/Videos/Cinematic Timelapse.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1] brightness-[0.8]"
+                        style={{ transform: "translateZ(0)" }}
                     />
-                    {/* Overlay gradients for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
-                    {/* Subtle blue glow overlay to enhance the crystalline effect */}
-                    <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
                 </div>
 
-                <div className="relative z-10 max-w-7xl mx-auto px-8 py-40 w-full">
-                    <div className="max-w-3xl">
-                        {/* Badge with Glassmorphism */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 rounded-full bg-white/5 backdrop-blur-md border border-cyan-400/20 shadow-lg shadow-cyan-500/10">
-                            <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                            <span className="text-[11px] font-mono tracking-[0.3em] uppercase text-cyan-300">
-                                GOVERNANCE NEXUS // ACTIVE
+                {/* LAYER 1: Balanced Overlays (Vignette + Global Fade) */}
+                <div className="absolute inset-0 z-10 pointer-events-none">
+                    {/* Balanced vignette for centered content */}
+                    <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.8)]" />
+
+                    {/* Deep bottom and top fades for focus */}
+                    <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                    <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black via-black/20 to-transparent" />
+                </div>
+
+                {/* LAYER 2: Content Wrapper (Centered) */}
+                <div className="relative z-20 max-w-7xl mx-auto px-8 w-full flex flex-col items-center text-center pt-32 pb-20">
+                    <div className="max-w-4xl" data-scene-element>
+                        {/* Status Token */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                            className="relative inline-flex items-center gap-3 px-4 py-2 mb-10 rounded-full bg-white/5 backdrop-blur-xl border border-cyan-400/30 mx-auto shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                        >
+                            {/* Animated pulse ring */}
+                            <motion.div
+                                className="absolute inset-0 rounded-full border border-cyan-400/50"
+                                animate={{
+                                    scale: [1, 1.03, 1],
+                                    opacity: [0.3, 0.6, 0.3]
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                            />
+                            <div className="relative flex h-2 w-12 overflow-hidden">
+                                <span className="absolute inset-0 bg-cyan-500/10 rounded-full"></span>
+                                <motion.span
+                                    className="absolute inset-y-0 w-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                                    animate={{
+                                        x: ['-100%', '1200%']
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "linear"
+                                    }}
+                                />
+                            </div>
+                            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-cyan-200/80">
+                                Unified Governance Intelligence // Online
                             </span>
-                        </div>
+                        </motion.div>
 
-                        {/* System Status */}
-                        <span className="text-cyan-400/70 font-mono text-[10px] tracking-[0.5em] uppercase mb-8 block">
-                            CORE_PROTOCOL://CRYSTALLINE_ENFORCEMENT
-                        </span>
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 1 }}
+                            className="flex flex-col items-center gap-4"
+                        >
+                            <h1 className="text-6xl md:text-8xl font-light tracking-tight text-white/95 leading-[1.05] font-playfair mb-4">
+                                <span className="block mb-1">Govern Every</span>
+                                <span className="block italic">AI Interaction</span>
+                                <span className="block text-4xl md:text-5xl mt-2 text-white/40">Across Your Enterprise</span>
+                            </h1>
 
-                        {/* Main Headline with Letter Stagger */}
-                        <h1 className="hero-headline text-6xl md:text-8xl font-black mb-12 leading-[1.1] tracking-tight overflow-visible">
-                            <span className="block text-white font-playfair italic pr-8 pb-1 overflow-visible">Command Your</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 font-playfair italic pr-10 pb-4 overflow-visible">
-                                AI Destiny
-                            </span>
-                        </h1>
+                            <div className="flex items-center gap-4 text-xs font-mono text-cyan-400/60 uppercase tracking-[0.4em] bg-black/40 backdrop-blur-md px-6 py-2 rounded-full border border-white/5">
+                                <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                                <TypingText text="Executing Policy Gate // Online // <200ms Latency" speed={40} />
+                            </div>
 
-                        {/* Subheadline with Better Contrast & Split Sentences */}
-                        <div className="mb-10 max-w-2xl space-y-4">
-                            <p className="text-gray-200 text-xl md:text-2xl font-light leading-relaxed">
-                                AEGIS transforms governance from static policy into a <span className="text-cyan-400 font-semibold">living enforcement architecture</span>.
+                            <p className="text-gray-300 text-lg md:text-2xl font-light leading-relaxed mb-10 max-w-4xl mx-auto font-playfair">
+                                Block PII leaks, enforce policy, and deliver audit-ready governance in under <span className="text-cyan-400 font-semibold font-mono">200ms</span>. <br />
+                                <span className="text-white/60 italic font-medium">Stop shadow AI before it reaches external models.</span>
                             </p>
-                            <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
-                                Crystalline precision. Deterministic control. Zero compromise.
-                            </p>
-                        </div>
+                        </motion.div>
 
-                        {/* Technical Specs Bar with Enhanced Glow */}
-                        <div className="flex items-center gap-6 mb-12 font-mono text-[10px] tracking-[0.3em] uppercase text-gray-500 flex-wrap">
-                            <span className="flex items-center gap-2">
-                                <span className="relative">
-                                    <span className="absolute w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-                                    <span className="absolute w-1.5 h-1.5 rounded-full bg-cyan-500 blur-sm animate-pulse" />
-                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 block" />
-                                </span>
-                                LATENCY: 178ms
-                            </span>
-                            <span className="w-px h-4 bg-white/10" />
-                            <span>ENFORCEMENT: REAL-TIME</span>
-                            <span className="w-px h-4 bg-white/10" />
-                            <span className="text-cyan-500/70">CORE: ARMED</span>
-                        </div>
 
-                        {/* CTA Buttons */}
-                        <div className="flex items-center gap-8 flex-wrap">
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1, duration: 0.8 }}
+                            className="flex items-center justify-center gap-6 flex-wrap"
+                        >
                             <MagneticButton
-                                onClick={() => navigate("/dashboard")}
-                                strength={0.4}
-                                className="group relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest transition-all hover:shadow-2xl hover:shadow-cyan-500/40 active:scale-95 animate-glow"
+                                onClick={() => navigate("/contact")}
+                                strength={0.2}
+                                className="group relative border border-cyan-400 text-cyan-400 px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden hover:shadow-[0_0_20px_rgba(0,255,255,0.6)]"
                             >
-                                <span className="relative z-10">Access Governance Core</span>
-                                <div className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                                <span className="relative z-10 transition-colors uppercase">Book Enterprise Demo</span>
+                                <div className="absolute inset-0 bg-cyan-400/20 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-0" />
                             </MagneticButton>
-                            <a
-                                href="https://calendly.com/aegis-founders"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-white/5 backdrop-blur-md border border-cyan-400/30 text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white/10 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all font-mono hover:scale-[1.02] active:scale-95"
-                            >
-                                Request Integration
-                            </a>
-                        </div>
 
-                        {/* Bottom Status Line */}
-                        <div className="mt-16 pt-8 border-t border-white/10">
-                            <p className="font-mono text-[9px] text-gray-600 tracking-[0.3em] uppercase">
-                                CRYSTALLINE ARCHITECTURE // ZERO CODE CHANGES // INSTITUTIONAL GRADE
-                            </p>
-                        </div>
+                            <button
+                                onClick={() => navigate("/sandbox")}
+                                className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors py-4 px-2"
+                            >
+                                <span className="text-[11px] font-mono uppercase tracking-[0.3em]">Try the Sandbox</span>
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-cyan-400" />
+                            </button>
+                        </motion.div>
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
-            {/* Product Video Section - Now an extension of the Hero */}
+            {/* ═══════════════ GOVERNANCE TAPE ═══════════════ */}
+            <GovernanceTape />
+
+            {/* ═══════════════ TRUST RIBBON ═══════════════ */}
+            <TrustRibbon />
+
+            {/* ═══════════════ PRODUCT VIDEO SECTION ═══════════════ */}
             <ProductVideoSection />
+
+            {/* Subtle Post-Dashboard Video Background Section */}
+            <section className="relative h-[60vh] flex items-center justify-center overflow-hidden border-y border-white/5">
+                <div className="absolute inset-0 z-0">
+                    <video
+                        src="/Videos/Video 2.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+                </div>
+                <div className="relative z-10 text-center max-w-4xl px-8">
+                    <p className="font-mono text-[10px] tracking-[0.5em] uppercase text-cyan-400/60 mb-6">
+                        <TypingText text="PERSISTENT_GOVERNANCE_PROTOCOL // ACTIVE" delay={1} speed={60} />
+                    </p>
+                    <h3 className="text-3xl md:text-5xl font-light leading-tight text-white/90 font-playfair">
+                        Always Watching. Always Enforcing. <br />
+                        <span className="block mt-2 text-cyan-400">Total Operational</span>
+                        <span className="block text-cyan-400">Integrity.</span>
+                    </h3>
+                </div>
+            </section>
 
             {/* Kinetic Enforcement Loop — Capability Breadth */}
             <KineticEnforcement />
 
+            {/* ═══════════════ DEPLOYMENT ARCHITECTURE ═══════════════ */}
+            <DeploymentSection />
+
             {/* Scrollytelling Audit Trail */}
             < AuditTrailSection />
 
+            {/* Live Governance Demo - Interactive Proof */}
+            <LiveGovernanceDemo />
+
             {/* Interactive Governance Proof */}
-            < ComparisonLens />
+            <StrategicDifferentiation />
+            <ComparisonLens />
 
             {/* Visual Process Journey (Image-Based) */}
             < ProcessJourney />
@@ -313,13 +408,13 @@ export function LandingPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div>
                             <Badge icon={<Sparkles className="w-4 h-4 text-purple-400" />} className="mb-6">
-                                The AEGIS Advantage
+                                The SURO Advantage
                             </Badge>
                             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-white brand-heading leading-tight">
-                                Static Policy is <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-500">Dead</span>.
+                                Static Policy is <span className="text-red-400">Dead</span>.
                             </h2>
                             <p className="text-gray-400 text-xl mb-10 leading-relaxed max-w-xl">
-                                Traditional PDF-based policies fail the moment they're signed. AEGIS transforms your governance into a <span className="text-white font-medium">living, enforceable system</span> that adapts in real-time.
+                                Traditional PDF-based policies fail the moment they're signed. SURO transforms your governance into a <span className="text-white font-medium">living, enforceable system</span> that adapts in real-time.
                             </p>
 
                             <div className="space-y-6">
@@ -418,6 +513,16 @@ export function LandingPage() {
                 </div>
             </section>
 
+            {/* Scroll Based Velocity Section — High-Speed Governance Trace */}
+            <ScrollVelocityContainer className="bg-black/40 border-y border-white/5">
+                <ScrollVelocityRow baseVelocity={2} direction={1} className="text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-500 to-white block font-playfair font-medium">
+                    GDPR EU_AI_ACT NIST_RMF HIPAA SOC2 ISO27001 PCI_DSS
+                </ScrollVelocityRow>
+                <ScrollVelocityRow baseVelocity={2} direction={-1} className="text-blue-300/40 mt-4 block font-playfair font-medium">
+                    DETERMINISTIC IMMUTABLE REAL_TIME ENFORCEMENT INFINITE_TRACEABILITY ZERO_TRUST
+                </ScrollVelocityRow>
+            </ScrollVelocityContainer>
+
             {/* Core Capabilities */}
             <section className="py-32 px-8">
                 <div className="max-w-7xl mx-auto">
@@ -439,19 +544,19 @@ export function LandingPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <ServiceCard
-                            icon={<Activity className="w-6 h-6 text-white" />}
+                            icon={<MonitorPulseIcon className="w-8 h-8 text-white" />}
                             title="Real-Time Monitoring"
                             subtitle="Continuous AI Oversight"
                             description="Track every AI interaction across your organization."
                         />
                         <ServiceCard
-                            icon={<Shield className="w-6 h-6 text-white" />}
+                            icon={<ShieldStreamIcon className="w-8 h-8 text-white" />}
                             title="Policy Engine"
                             subtitle="Deterministic Rules"
                             description="Convert organizational policies into real-time rules."
                         />
                         <ServiceCard
-                            icon={<Users className="w-6 h-6 text-white" />}
+                            icon={<TeamShieldIcon className="w-8 h-8 text-white" />}
                             title="Human-in-the-Loop"
                             subtitle="Expert Oversight"
                             description="Intelligent escalation for high-risk decisions."
@@ -460,6 +565,31 @@ export function LandingPage() {
                 </div>
             </section>
 
+            {/* ═══════════════ ROI RISK SECTION ═══════════════ */}
+            <section className="py-32 px-8 border-t border-white/5 bg-zinc-950/40 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+                    <div className="md:w-2/3">
+                        <Badge icon={<PieChart className="w-3 h-3" />} className="mb-6">
+                            Risk Assessment
+                        </Badge>
+                        <h2 className="text-4xl md:text-5xl font-light brand-heading mb-6">
+                            Calculate Your <span className="italic font-playfair text-white/30">AI Liability</span>
+                        </h2>
+                        <p className="text-gray-400 max-w-xl font-light leading-relaxed">
+                            Unmanaged AI usage creates hidden financial exposure. Use our quantitative Risk Calculator to identify potential leak liabilities and compliance gaps within minutes.
+                        </p>
+                    </div>
+                    <div className="md:w-1/3 flex flex-col items-center gap-4">
+                        <button
+                            onClick={() => navigate("/calculator")}
+                            className="w-full bg-white text-black py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-cyan-400 transition-all flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                        >
+                            Open Risk Calculator <ArrowRight className="w-4 h-4" />
+                        </button>
+                        <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">No Registration Required</span>
+                    </div>
+                </div>
+            </section>
 
             {/* CTA Section — Governance Convergence Point */}
             <section className="py-40 px-8 border-t border-white/5 relative overflow-hidden" id="contact">
@@ -478,17 +608,17 @@ export function LandingPage() {
                         Ready to Deploy?
                     </Badge>
                     <h2 className="text-5xl md:text-7xl font-bold mb-8 text-white brand-heading leading-tight">
-                        See AEGIS in Action
+                        See SURO in Action
                     </h2>
                     <p className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
                         Experience how <span className="text-white font-semibold">real-time governance</span> transforms AI adoption from risky to trustworthy.
                     </p>
                     <div className="flex flex-col items-center gap-4">
                         <Link
-                            to="/dashboard"
-                            className="group bg-gradient-to-r from-purple-600 via-blue-600 to-blue-500 text-white px-10 py-5 rounded-full text-xl font-medium hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/30 transition-all flex items-center gap-2"
+                            to="/contact"
+                            className="group bg-white text-black px-10 py-5 rounded-full text-xl font-medium hover:bg-cyan-400 hover:text-black transition-all flex items-center gap-2 shadow-2xl hover:shadow-cyan-500/20"
                         >
-                            Explore Dashboard <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                            Book Enterprise Demo <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                         </Link>
                         <span className="font-mono text-[9px] text-gray-600 tracking-[0.3em] uppercase mt-2">
                             ALL GOVERNANCE PATHS CONVERGE HERE
@@ -497,9 +627,11 @@ export function LandingPage() {
                 </div>
             </section>
 
+            <SoundToggle />
             <Footer />
         </div >
     );
 }
+
 
 

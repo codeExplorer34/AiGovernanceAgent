@@ -1,334 +1,525 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Navbar } from "../components/marketing/Navbar";
 import { Footer } from "../components/marketing/Footer";
 import { Badge } from "../components/marketing/Badge";
-import { Shield, Target, Eye, Users, BookOpen, Lock, ArrowRight, Download, AlertCircle, CheckCircle, Clock, TrendingUp, Code } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Shield, Target, Eye, Users, BookOpen, Lock, ArrowRight, Download, AlertCircle, CheckCircle, Clock, TrendingUp, Code, Globe } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { TextAnimate } from "../components/ui/TextAnimate";
 import { EncryptedText } from "../components/ui/encrypted-text";
 import { LogoLoop } from "../components/ui/LogoLoop";
+import DarkVeil from "../components/ui/DarkVeil";
+import { ShieldStreamIcon, ScanEyeIcon, HexLockIcon, BoltNodesIcon, AuditDocIcon, TeamShieldIcon, MonitorPulseIcon } from "../components/ui/CustomIcons";
+import Orb from "../components/ui/Orb";
+import { TimelineRail } from "../components/ui/TimelineRail";
+import { useRef } from "react";
 
 export function AboutPage() {
+    const navigate = useNavigate();
     return (
         <div className="min-h-screen bg-black text-white">
             <Navbar />
 
-            {/* Hero Section - Tightened Hierarchy */}
-            <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden pt-32 pb-20">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(124,58,237,0.15),transparent_60%)] z-0" />
+            {/* ═══════════════ EDITORIAL HERO: THE MANIFEST ═══════════════ */}
+            <section className="relative min-h-screen flex items-center overflow-hidden pt-32 pb-20 border-b border-white/5">
+                <div className="absolute inset-0 z-0">
+                    <DarkVeil
+                        hueShift={240} // Deeper blue/purple shift
+                        noiseIntensity={0.03}
+                        scanlineIntensity={0.15}
+                        speed={0.2} // Slower, more institutional
+                        scanlineFrequency={3}
+                        warpAmount={0.03}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+                    {/* 3D Orb - Kinetic Core */}
+                    <motion.div
+                        className="absolute top-1/2 right-12 -translate-y-1/2 opacity-30 w-[600px] h-[600px]"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                    >
+                        <Orb hue={180} backgroundColor="#000000" />
+                    </motion.div>
+                </div>
 
-                <div className="relative z-10 max-w-4xl mx-auto px-8 text-center pt-20">
-                    <Badge icon={<Shield className="w-4 h-4" />} className="mb-10 hero-meta bg-purple-500/5 border-purple-500/20">
-                        <span className="font-mono text-[10px] tracking-widest uppercase">COORD_SYS://JOURNEY_LOG_2025</span>
-                    </Badge>
+                <div className="relative z-10 max-w-7xl mx-auto px-8 w-full">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+                        {/* Main Manifesto Content */}
+                        <div className="lg:col-span-8">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, ease: "easeOut" }}
+                            >
+                                <Badge icon={<ShieldStreamIcon className="w-3 h-3" />} className="mb-12 hero-meta bg-white/5 border-white/10 py-1 px-4">
+                                    <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-gray-400">INSTITUTIONAL_CHARTER // V2.05</span>
+                                </Badge>
 
-                    <h1 className="hero-title mb-6 max-w-3xl mx-auto brand-heading leading-tight">
-                        <TextAnimate animation="radarScan" as="span">Pioneering AI Governance</TextAnimate>
-                        <TextAnimate animation="radarScan" duration={0.8} delay={0.2} as="span" className="hero-sub block mt-2 text-3xl opacity-80">
-                            with Precision Transparency.
-                        </TextAnimate>
-                    </h1>
+                                <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-10 brand-heading tracking-tight leading-[0.95] text-white">
+                                    <motion.span
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 0.4, y: 0 }}
+                                        transition={{ delay: 0.2, duration: 1 }}
+                                        className="block font-playfair italic text-3xl md:text-4xl lg:text-5xl mb-4"
+                                    >
+                                        The SURO Manifest
+                                    </motion.span>
+                                    <motion.span
+                                        initial={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+                                        animate={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
+                                        transition={{ delay: 0.4, duration: 1.2, ease: "circOut" }}
+                                        className="inline-block"
+                                    >
+                                        <TextAnimate animation="radarScan" as="span" className="font-playfair">Pioneering</TextAnimate>
+                                    </motion.span>
+                                    <br />
+                                    <motion.span
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 0.8 }}
+                                        transition={{ delay: 0.8, duration: 1 }}
+                                        className="font-playfair text-white"
+                                    >
+                                        AI
+                                    </motion.span>
+                                    <motion.span
+                                        initial={{ opacity: 0, filter: "blur(10px)" }}
+                                        animate={{ opacity: 1, filter: "blur(0px)" }}
+                                        transition={{ delay: 1, duration: 1 }}
+                                    >
+                                        <TextAnimate animation="radarScan" delay={1.2} as="span" className="font-playfair text-cyan-400">Governance</TextAnimate>
+                                    </motion.span>
+                                </h1>
 
-                    <p className="hero-body mx-auto mb-10 max-w-2xl">
-                        AEGIS is your trusted agent for AI governance strategy. We specialize in transforming static policies into enforceable, real-time systems for regulated industries.
-                    </p>
+                                <p className="text-xl md:text-2xl text-gray-400 font-light leading-relaxed max-w-2xl mb-12">
+                                    SURO was founded to solve the enterprise AI governance crisis before it becomes a regulatory catastrophe. We build the <span className="text-cyan-400 font-semibold">control layer</span> that stands between your AI tools and your liability.
+                                </p>
 
-                    {/* CTAs */}
-                    <div className="flex items-center justify-center gap-4 flex-wrap">
-                        <Link
-                            to="/dashboard"
-                            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:shadow-2xl hover:shadow-purple-500/50 transition-all inline-flex items-center gap-2"
-                        >
-                            Explore Dashboard <ArrowRight className="w-5 h-5" />
-                        </Link>
-                        <a
-                            href="#"
-                            className="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition-all inline-flex items-center gap-2"
-                        >
-                            <Download className="w-5 h-5" /> Download Governance Brief
-                        </a>
+                                <div className="flex items-center gap-6">
+                                    <Link
+                                        to="/dashboard"
+                                        className="bg-cyan-400 text-black px-10 py-4 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-cyan-300 transition-all flex items-center gap-3 group shadow-[0_0_20px_rgba(34,211,238,0.4)]"
+                                    >
+                                        Book Enterprise Demo <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                    <button
+                                        onClick={() => window.location.href = "mailto:suhaybshaik@outlook.com?subject=Whitepaper Request"}
+                                        className="text-white/60 hover:text-cyan-400 transition-colors flex items-center gap-3 group px-4 py-2 border border-white/5 hover:border-cyan-400/30 rounded-lg bg-white/5 backdrop-blur-sm"
+                                    >
+                                        <Download className="w-4 h-4 text-cyan-400" />
+                                        <span className="text-[10px] font-mono uppercase tracking-widest transition-colors font-bold">Request Whitepaper (.PDF)</span>
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        {/* Protocol Sidebar: Metadata */}
+                        <div className="lg:col-span-4 hidden lg:block">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 0.6, y: 0 }}
+                                transition={{ delay: 0.8, duration: 1 }}
+                                className="border-l border-white/10 pl-8 space-y-12"
+                            >
+                                <div className="space-y-2 group">
+                                    <span className="block text-[8px] font-mono uppercase tracking-[0.4em] text-cyan-400/60 transition-colors group-hover:text-cyan-400">Node Status</span>
+                                    <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md group-hover:border-cyan-400/30 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all">
+                                        <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]">
+                                            <motion.div
+                                                className="w-full h-full rounded-full bg-cyan-400"
+                                                animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
+                                                transition={{ duration: 2, repeat: Infinity }}
+                                            />
+                                        </div>
+                                        <span className="text-sm font-mono text-white tracking-widest uppercase font-bold">Global Equilibrium</span>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2 group">
+                                    <span className="block text-[8px] font-mono uppercase tracking-[0.4em] text-gray-500 transition-colors group-hover:text-cyan-400">Governance Type</span>
+                                    <div className="bg-white/5 border border-white/10 p-4 rounded-xl backdrop-blur-md group-hover:border-cyan-400/30 transition-all">
+                                        <span className="block text-sm font-mono text-white tracking-widest uppercase font-bold">Deterministic // Immutable</span>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <span className="block text-[8px] font-mono uppercase tracking-[0.4em] text-gray-500">Latency Compliance</span>
+                                    <span className="block text-xs font-mono text-white tracking-widest uppercase">&lt; 180ms Execution</span>
+                                </div>
+
+                                <div className="pt-8 border-t border-white/5">
+                                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                                        <span className="block text-[7px] font-mono uppercase tracking-[0.3em] text-gray-400 mb-3">Core Coordinates</span>
+                                        <div className="text-[10px] font-mono text-cyan-400/40 leading-tight">
+                                            0x3F_D492_A91<br />
+                                            LAT: 51.5074° N<br />
+                                            LON: 0.1278° W
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* The Problem Section - Increased Spacing */}
-            <section className="py-40 px-8 bg-gradient-to-b from-black to-gray-900/20">
-                <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-20"
-                    >
-                        <Badge icon={<AlertCircle className="w-4 h-4" />} className="mb-6">
-                            The Problem
-                        </Badge>
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" as="span" by="word">The AI Oversight</TextAnimate>
-                            {" "}
-                            <TextAnimate
-                                animation="blurInUp"
-                                as="span"
-                                by="word"
-                                className="text-white"
-                            >
-                                Gap
-                            </TextAnimate>
-                        </h2>
-                    </motion.div>
+            {/* ═══════════════ THE PROBLEM: THE INTELLIGENCE GAP ═══════════════ */}
+            <section className="py-40 px-8 bg-black relative">
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
+                        <div className="lg:col-span-12">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                            >
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="h-px w-12 bg-red-500/50" />
+                                    <span className="font-mono text-[10px] tracking-[0.5em] uppercase text-red-500">Systemic Weakness</span>
+                                </div>
+                                <h2 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 brand-heading leading-none">
+                                    The Intelligence <br />
+                                    <span className="text-white/20 italic font-playfair">Deficit</span>
+                                </h2>
+                            </motion.div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[300px]">
+                        {/* Shadow AI - Large Bento Card */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                            className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-10 hover:border-purple-500/30 transition-all shadow-[inset_0_1px_10px_rgba(0,0,0,0.5)] border-t-white/10"
+                            className="md:col-span-2 lg:col-span-2 row-span-2 bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-2xl border border-white/10 rounded-[40px] p-12 flex flex-col justify-between group hover:border-red-500/40 hover:shadow-[0_0_40px_rgba(239,68,68,0.1)] transition-all pointer-events-auto overflow-hidden relative shadow-2xl"
                         >
-                            <div className="w-14 h-14 rounded-xl bg-red-600/10 border border-white/10 flex items-center justify-center mb-6">
-                                <Eye className="w-7 h-7 text-red-400" />
+                            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                            <div className="relative z-10">
+                                <motion.div
+                                    className="w-20 h-20 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-10 group-hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all"
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
+                                >
+                                    <ScanEyeIcon className="w-10 h-10 text-red-500" />
+                                    <motion.div
+                                        className="absolute inset-0 rounded-2xl border-2 border-red-500/40"
+                                        animate={{ opacity: [0, 1, 0], scale: [1, 1.2, 1] }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                    />
+                                </motion.div>
+                                <h3 className="text-4xl font-bold mb-6 brand-heading leading-tight tracking-tight">Behavioral <br />Blindspot</h3>
+                                <p className="text-gray-400 text-lg leading-relaxed max-w-sm">
+                                    Traditional security tools check credentials and network traffic. But when AI agents
+                                    make authorized API calls that violate strategic intent? Zero Trust is powerless.
+                                    SURO monitors the <span className="text-red-400 font-bold uppercase tracking-tighter">why</span> behind every action.
+                                </p>
                             </div>
-                            <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 brand-heading">
-                                Lack of Visibility
-                            </h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                No centralized view of how AI is being used across the organization. <span className="text-gray-200 font-semibold">Shadow AI runs unchecked</span>, exposing enterprises to unknown risks.
-                            </p>
+                            <div className="relative z-10 flex items-center gap-4 text-[11px] font-mono text-gray-500 tracking-[.3em] uppercase mt-12 border-t border-white/5 pt-8">
+                                <span className="font-bold text-white/60">Risk Level: <span className="text-red-500">Critical</span></span>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]">
+                                        <motion.div
+                                            className="w-full h-full rounded-full bg-red-500"
+                                            animate={{ scale: [1, 2, 1], opacity: [1, 0, 1] }}
+                                            transition={{ duration: 1.5, repeat: Infinity }}
+                                        />
+                                    </div>
+                                    <span className="text-red-500 font-bold">Live Leakage</span>
+                                </div>
+                            </div>
                         </motion.div>
 
+                        {/* Regulatory Drift - Tall Bento Card */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-10 hover:border-purple-500/30 transition-colors"
+                            transition={{ delay: 0.1 }}
+                            className="row-span-2 bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-[40px] p-10 flex flex-col justify-between group hover:border-purple-500/40 hover:bg-white/[0.06] transition-all relative overflow-hidden"
                         >
-                            <div className="w-14 h-14 rounded-xl bg-orange-600/20 border border-orange-500/30 flex items-center justify-center mb-6">
-                                <Lock className="w-7 h-7 text-orange-400" />
+                            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div>
+                                <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-8 shadow-xl">
+                                    <BookOpen className="w-7 h-7 text-purple-400" />
+                                </div>
+                                <h3 className="text-3xl font-bold mb-6 brand-heading leading-tight">Regulatory <br />Drift</h3>
+                                <p className="text-gray-400 text-base leading-relaxed">
+                                    Static policies can't keep pace with generative evolution. When models drift, compliance breaks—leaving organizations exposed to retroactive litigation and EU AI Act penalties.
+                                </p>
                             </div>
-                            <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 brand-heading">
-                                <Lock className="w-5 h-5 text-orange-400" /> Lack of Control
-                            </h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Policies exist but are not enforceable in real-time. By the time violations are discovered, <span className="text-gray-200 font-semibold">data has already been exposed</span>.
-                            </p>
+                            <div className="space-y-4 pt-10">
+                                <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
+                                    <motion.div
+                                        className="h-full bg-gradient-to-r from-purple-600 to-purple-400"
+                                        initial={{ width: 0 }}
+                                        whileInView={{ width: "66%" }}
+                                        transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+                                    />
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[10px] font-mono text-purple-400 uppercase tracking-[.3em] font-bold">Mismatch Detected</span>
+                                    <span className="text-[10px] font-mono text-white tracking-widest">66%</span>
+                                </div>
+                            </div>
                         </motion.div>
 
+                        {/* Behavioral Anomaly - Small Bento Card */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-10 hover:border-purple-500/30 transition-colors"
+                            transition={{ delay: 0.2 }}
+                            className="bg-white/[0.03] backdrop-blur-xl border border-white/5 rounded-[40px] p-8 flex items-center gap-6 hover:bg-white/[0.05] transition-all"
                         >
-                            <div className="w-14 h-14 rounded-xl bg-yellow-600/20 border border-yellow-500/30 flex items-center justify-center mb-6">
-                                <BookOpen className="w-7 h-7 text-yellow-400" />
+                            <div className="w-12 h-12 rounded-full bg-orange-500/10 flex-shrink-0 flex items-center justify-center">
+                                <TrendingUp className="w-6 h-6 text-orange-400" />
                             </div>
-                            <h3 className="text-2xl font-bold mb-4 flex items-center gap-2 brand-heading">
-                                <BookOpen className="w-5 h-5 text-yellow-400" /> Lack of Explainability
-                            </h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Technical logs are not regulator-friendly. When auditors ask "why?", teams <span className="text-gray-200 font-semibold">scramble to piece together explanations</span>.
-                            </p>
+                            <div>
+                                <h4 className="text-lg font-bold brand-heading mb-1">Behavioral Anomaly</h4>
+                                <p className="text-xs text-gray-500">Real-time scoring of agent actions against intent.</p>
+                            </div>
+                        </motion.div>
+
+                        {/* Cross-Model Oversight - Small Bento Card */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border border-white/10 rounded-[40px] p-8 flex items-center gap-6"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-blue-500/10 flex-shrink-0 flex items-center justify-center">
+                                <Globe className="w-6 h-6 text-blue-400" />
+                            </div>
+                            <div>
+                                <h4 className="text-lg font-bold brand-heading mb-1">Ecosystem Vision</h4>
+                                <p className="text-xs text-gray-500">Cross-cloud oversight of NHI identity sprawl.</p>
+                            </div>
                         </motion.div>
                     </div>
                 </div>
             </section>
 
-            {/* What AEGIS Does - Card-Based Layout */}
-            <section className="py-40 px-8 bg-gradient-to-b from-gray-900/20 via-purple-900/5 to-black">
-                <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-8"
-                    >
-                        <Badge icon={<Shield className="w-4 h-4" />} className="mb-6">
-                            Our Solution
-                        </Badge>
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" by="word">What AEGIS Does</TextAnimate>
-                        </h2>
-                        <p className="text-lg text-purple-300 font-medium max-w-2xl mx-auto mb-16">
-                            We transform AI governance from reactive compliance to <span className="text-purple-400 font-semibold">proactive risk prevention</span>.
-                        </p>
-                    </motion.div>
+            {/* ═══════════════ THE SOLUTION: ARCHITECTURAL CORE ═══════════════ */}
+            <section className="py-40 px-8 relative overflow-hidden bg-black">
+                {/* Background Grid Pattern */}
+                <div className="absolute inset-0 z-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Card 1 */}
-                        <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-purple-500/40 transition-all group">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <Shield className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">AI Governance Gateway</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Central enforcement layer through which all AI requests flow. Every interaction is evaluated against policy rules before data leaves your organization. <span className="text-gray-200 font-semibold">Real-time blocking of violations</span>, not after-the-fact discovery.
-                            </p>
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+                        {/* Left Side: Editorial Content */}
+                        <div className="lg:col-span-5">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1 }}
+                            >
+                                <Badge icon={<ShieldStreamIcon className="w-3 h-3" />} className="mb-8 bg-cyan-500/5 border-cyan-500/20">
+                                    <span className="font-mono text-[9px] tracking-widest uppercase">Protocol_Objective</span>
+                                </Badge>
+
+                                <h2 className="text-5xl md:text-7xl font-light mb-8 brand-heading leading-tight">
+                                    Architectural <br />
+                                    <span className="italic font-playfair text-cyan-400">Integrity</span>
+                                </h2>
+
+                                <p className="text-xl text-gray-400 font-light leading-relaxed mb-10">
+                                    Infrastructure secures the gate; SURO governs the behavior.
+                                    We provide the <span className="text-cyan-400 font-semibold">unified governance brain</span> that
+                                    monitors intent alignment, detects behavioral drift, and ensures
+                                    compliance across every autonomous agent in your ecosystem.
+                                </p>
+
+                                <ul className="space-y-8 mt-12">
+                                    {[
+                                        { title: "Behavioral Oversight", desc: "Intent scoring for autonomous agent actions.", icon: <Shield className="w-5 h-5 text-cyan-400" /> },
+                                        { title: "Meta-Security Layer", desc: "Oversight of security vaults and firewalls.", icon: <Lock className="w-5 h-5 text-cyan-400" /> },
+                                        { title: "Audit Persistence", desc: "Cross-ecosystem compliance data lake.", icon: <CheckCircle className="w-5 h-5 text-cyan-400" /> }
+                                    ].map((item, i) => (
+                                        <motion.li
+                                            key={i}
+                                            className="flex gap-6 group cursor-pointer p-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/5 transition-all"
+                                            whileHover={{ x: 10 }}
+                                        >
+                                            <div className="p-3 rounded-lg bg-cyan-400/10 border border-cyan-400/20 group-hover:bg-cyan-400/20 transition-colors flex-shrink-0 h-fit">
+                                                {item.icon}
+                                            </div>
+                                            <div>
+                                                <h4 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-2 group-hover:text-cyan-400 transition-colors">{item.title}</h4>
+                                                <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">{item.desc}</p>
+                                            </div>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </motion.div>
                         </div>
 
-                        {/* Card 2 */}
-                        <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-purple-500/40 transition-all group">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-600 to-purple-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <Eye className="w-8 h-8 text-white" />
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">Shadow AI Detection</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Proactively identifies unauthorized AI usage by analyzing network and API activity. Surface unapproved AI tools early and bring them under governance <span className="text-gray-200 font-semibold">before incidents occur</span>.
-                            </p>
-                        </div>
+                        {/* Right Side: Visual Components */}
+                        <div className="lg:col-span-7">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Card 1 */}
+                                <motion.div
+                                    whileHover={{ y: -5 }}
+                                    className="bg-white/[0.03] border border-white/10 rounded-[40px] p-10 backdrop-blur-3xl group"
+                                >
+                                    <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-8 shadow-2xl shadow-cyan-500/20">
+                                        <ShieldStreamIcon className="w-7 h-7 text-cyan-400" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-4 brand-heading">Governance Gateway</h3>
+                                    <p className="text-sm text-gray-500 leading-relaxed">
+                                        The primary layer of defense. Every packet is analyzed for PII, malicious intent, and policy violations in under 180ms.
+                                    </p>
+                                </motion.div>
 
-                        {/* Card 3 */}
-                        <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-purple-500/40 transition-all group">
-                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-600 to-cyan-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                <BookOpen className="w-8 h-8 text-white" />
+                                {/* Card 2 */}
+                                <motion.div
+                                    whileHover={{ y: -5 }}
+                                    className="md:mt-12 bg-white/[0.03] border border-white/10 rounded-[40px] p-10 backdrop-blur-3xl"
+                                >
+                                    <div className="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center mb-8 shadow-2xl shadow-red-500/20">
+                                        <ScanEyeIcon className="w-7 h-7 text-red-400" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-4 brand-heading">Proactive Detection</h3>
+                                    <p className="text-sm text-gray-500 leading-relaxed">
+                                        Algorithmic identification of unauthorized API calls. We surface the "Shadow AI" that traditional firewalls ignore.
+                                    </p>
+                                </motion.div>
                             </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">Audit-Ready Narratives</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                <span className="text-gray-200 font-semibold">Human-readable explanations</span> for every decision. When regulators ask "why was this blocked?", AEGIS provides clear, factual answers referencing specific policies and regulations—in under 30 seconds.
-                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* How AEGIS Works - Detailed Flow */}
-            <section className="relative py-40 px-8 bg-black overflow-hidden mt-32">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.05),transparent_70%)] z-0" />
+            {/* ═══════════════ HOW IT WORKS: THE PROTOCOL ═══════════════ */}
+            <section className="py-40 px-8 bg-black relative">
+                <div className="max-w-7xl mx-auto border border-white/10 rounded-[48px] p-12 lg:p-24 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
 
-                <div className="relative z-10 max-w-6xl mx-auto">
-                    <div className="text-center mb-20">
-                        <Badge icon={<Target className="w-4 h-4" />} className="mb-6">
-                            How It Works
-                        </Badge>
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" as="span" by="word">AI Governance in</TextAnimate>
-                            {" "}
-                            <TextAnimate
-                                animation="blurInUp"
-                                as="span"
-                                by="word"
-                                className="text-white"
+                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20">
+                        <div>
+                            <Badge icon={<Target className="w-3 h-3" />} className="mb-8">
+                                <span className="font-mono text-[9px] tracking-widest uppercase">Operational_Flow</span>
+                            </Badge>
+                            <h2 className="text-5xl md:text-6xl font-light mb-10 brand-heading leading-tight">
+                                Autonomous <br />
+                                <span className="text-white/30 italic">Execution</span>
+                            </h2>
+                            <p className="text-lg text-gray-400 font-light leading-relaxed mb-12">
+                                The transition from policy to production must be instant.
+                                SURO maps governance logic directly to API request cycles,
+                                ensuring no model call goes unverified.
+                            </p>
+                            <button
+                                onClick={() => navigate("/standards")}
+                                className="flex items-center gap-2 text-cyan-400 font-mono text-[10px] uppercase tracking-widest hover:text-white transition-colors group mb-12"
                             >
-                                Three Steps
-                            </TextAnimate>
-                        </h2>
-                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            Every AI request flows through AEGIS before reaching external models. Here's how we transform governance from reactive to proactive.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-                        {/* Step 1 */}
-                        <div className="text-center">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
-                                1
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">Intercept & Analyze</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                AEGIS sits between your users and AI models. Every request is intercepted and evaluated against your governance policies in real-time.
-                            </p>
+                                Technical Protocol Specs <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                            </button>
                         </div>
 
-                        {/* Step 2 */}
-                        <div className="text-center">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
-                                2
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">Enforce & Modify</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Violations are blocked instantly. Approved requests may be modified (PII removed, prompts sanitized) before reaching the AI model.
-                            </p>
-                        </div>
-
-                        {/* Step 3 */}
-                        <div className="text-center">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-600 to-purple-600 flex items-center justify-center mx-auto mb-6 text-3xl font-bold">
-                                3
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 brand-heading">Log & Explain</h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                Every decision is logged with human-readable explanations. When auditors ask "why?", you have instant, factual answers.
-                            </p>
+                        <div className="space-y-12">
+                            {[
+                                { num: "01", title: "Intercept", desc: "Real-time capture of all AI traffic." },
+                                { num: "02", title: "Enforce", desc: "Instant policy check and sanitization." },
+                                { num: "03", title: "Explain", desc: "Log everything with human reasoning." }
+                            ].map((step, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: i * 0.2 }}
+                                    className="flex items-start gap-8"
+                                >
+                                    <span className="text-4xl font-playfair italic text-white/10">{step.num}</span>
+                                    <div>
+                                        <h4 className="text-xl font-bold text-white mb-2 brand-heading tracking-widest uppercase">{step.title}</h4>
+                                        <p className="text-sm text-gray-500 leading-relaxed">{step.desc}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Company Timeline */}
-            <section className="py-40 px-8 bg-gradient-to-b from-black via-blue-900/5 to-black">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-20">
-                        <Badge icon={<Clock className="w-4 h-4" />} className="mb-6">
-                            Our Journey
-                        </Badge>
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" as="span" by="word">Building the Future of</TextAnimate>
-                            {" "}
-                            <TextAnimate
-                                animation="blurInUp"
-                                as="span"
-                                by="word"
-                                className="text-white"
-                            >
-                                AI Governance
-                            </TextAnimate>
+            {/* ═══════════════ THE PROTOCOL SEQUENCE: HORIZONTAL JOURNEY ═══════════════ */}
+            <section className="py-40 bg-black relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-8 mb-16">
+                    <Badge icon={<Clock className="w-3 h-3" />} className="mb-8">
+                        <span className="font-mono text-[9px] tracking-widest uppercase">Protocol_Evolution</span>
+                    </Badge>
+                    <div className="flex items-end justify-between">
+                        <h2 className="text-5xl md:text-8xl font-light brand-heading leading-tight">
+                            Journey of <br />
+                            <span className="italic font-playfair text-white/20">Intelligence</span>
                         </h2>
+                        <p className="hidden md:block text-xs font-mono text-white/30 uppercase tracking-widest pb-4">
+                            scroll to explore →
+                        </p>
                     </div>
+                </div>
 
-                    <div className="space-y-12">
-                        {/* 2023 */}
-                        <div className="flex items-center gap-8">
-                            <div className="w-32 flex-shrink-0 text-right">
-                                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">2023</div>
-                            </div>
-                            <div className="w-px h-16 bg-gradient-to-b from-purple-500 to-blue-500"></div>
-                            <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-purple-500/30 transition-colors">
-                                <h3 className="text-2xl font-bold mb-3 flex items-center gap-2 brand-heading">
-                                    <CheckCircle className="w-6 h-6 text-emerald-400" />
-                                    Founded by AI Governance Experts
-                                </h3>
-                                <p className="text-gray-400 leading-relaxed">
-                                    Recognized the critical need for real-time AI governance as enterprises rapidly adopted generative AI without proper controls.
-                                </p>
-                            </div>
-                        </div>
+                {/* Horizontal Scroll Rail */}
+                <div className="relative">
+                    {/* Edge fades */}
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-                        {/* 2024 */}
-                        <div className="flex items-center gap-8">
-                            <div className="w-32 flex-shrink-0 text-right">
-                                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">2024</div>
-                            </div>
-                            <div className="w-px h-16 bg-gradient-to-b from-blue-500 to-emerald-500"></div>
-                            <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-blue-500/30 transition-colors">
-                                <h3 className="text-2xl font-bold mb-3 flex items-center gap-2 brand-heading">
-                                    <CheckCircle className="w-6 h-6 text-emerald-400" />
-                                    Enterprise Deployment
-                                </h3>
-                                <p className="text-gray-400 leading-relaxed">
-                                    Deployed at regulated organizations across banking, healthcare, and government sectors, governing millions of AI interactions safely.
-                                </p>
-                            </div>
-                        </div>
+                    <div className="overflow-x-auto pb-8 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                        <div className="flex gap-0 pl-[max(2rem,calc(50vw-600px))] pr-[max(2rem,calc(50vw-600px))] w-max">
+                            {[
+                                { year: "2023", title: "Inception & Charter", desc: "Formation of the SURO Governance Core. Defining the first deterministic governance protocols for enterprise AI.", accent: "#22d3ee", num: "01" },
+                                { year: "2024", title: "Enterprise Pilot", desc: "First Pilot with Tier-1 Financial Institution (NDA-protected). Processing 5M governance requests with zero-failure compliance.", accent: "#10b981", num: "02" },
+                                { year: "2025", title: "Protocol V2", desc: "Scaling to 15M monthly requests across Fortune 500 footprint. Integration of human-readable audit narratives.", accent: "#8b5cf6", num: "03" },
+                                { year: "2026", title: "Behavioral Standard", desc: "Establishing the global standard for intent alignment. SURO becomes the primary oversight layer for autonomous agents.", accent: "#f59e0b", num: "04" }
+                            ].map((milestone, i, arr) => (
+                                <div key={i} className="flex items-stretch">
+                                    {/* Card */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                        transition={{ delay: i * 0.1, duration: 0.8, ease: "easeOut" }}
+                                        viewport={{ once: false, amount: 0.1 }}
+                                        whileHover={{ borderColor: `${milestone.accent}80`, backgroundColor: "rgba(255,255,255,0.06)", scale: 1.02 }}
+                                        className="group relative w-80 flex-shrink-0 bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-3xl p-10 flex flex-col justify-between transition-all duration-500 cursor-default"
+                                        style={{ '--accent': milestone.accent } as React.CSSProperties}
+                                    >
+                                        {/* Top accent line on hover */}
+                                        <motion.div
+                                            className="absolute top-0 left-8 right-8 h-px"
+                                            style={{ background: `linear-gradient(to right, transparent, ${milestone.accent}, transparent)` }}
+                                            initial={{ opacity: 0 }}
+                                            whileHover={{ opacity: 1 }}
+                                        />
 
-                        {/* 2025 */}
-                        <div className="flex items-center gap-8">
-                            <div className="w-32 flex-shrink-0 text-right">
-                                <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-purple-400">2025</div>
-                            </div>
-                            <div className="w-px h-16 bg-gradient-to-b from-emerald-500 to-purple-500"></div>
-                            <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-emerald-500/30 transition-colors">
-                                <h3 className="text-2xl font-bold mb-3 flex items-center gap-2 brand-heading">
-                                    <CheckCircle className="w-6 h-6 text-emerald-400" />
-                                    Scaled to 15M+ Requests
-                                </h3>
-                                <p className="text-gray-400 leading-relaxed">
-                                    Processing millions of governance decisions monthly with 98.7% compliance scores and &lt;30-second regulator answer times.
-                                </p>
-                            </div>
+                                        <div>
+                                            <div className="flex items-center justify-between mb-8">
+                                                <span className="text-sm font-mono uppercase tracking-[0.3em] font-bold" style={{ color: milestone.accent, textShadow: `0 0 10px ${milestone.accent}40` }}>{milestone.year}</span>
+                                                <span className="text-[10px] font-mono text-white/20 uppercase tracking-widest">{milestone.num}</span>
+                                            </div>
+                                            <h3 className="text-2xl font-light brand-heading mb-6 leading-tight text-white">{milestone.title}</h3>
+                                            <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-200 transition-colors">{milestone.desc}</p>
+                                        </div>
+
+                                        {/* Bottom indicator */}
+                                        <div className="mt-10 flex items-center gap-3">
+                                            <div className="w-2 h-2 rounded-full transition-all duration-500" style={{ backgroundColor: milestone.accent, boxShadow: `0 0 10px ${milestone.accent}` }} />
+                                            <div className="flex-1 h-px bg-white/5" />
+                                        </div>
+                                    </motion.div>
+
+                                    {/* Connector line between cards */}
+                                    {i < arr.length - 1 && (
+                                        <div className="flex items-center w-12 flex-shrink-0">
+                                            <div className="w-full h-px bg-gradient-to-r from-white/10 to-white/5" />
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -346,7 +537,7 @@ export function AboutPage() {
                                 Powered by <span className="text-white">Industry Giants</span>
                             </h2>
                             <p className="text-gray-400 text-sm leading-relaxed">
-                                AEGIS leverages cutting-edge AI, robust backend frameworks, and secure data layers to ensure your governance is unbreakable.
+                                SURO leverages cutting-edge AI, robust backend frameworks, and secure data layers to ensure your governance is unbreakable.
                             </p>
                         </div>
 
@@ -429,6 +620,7 @@ export function AboutPage() {
                                 fadeOut
                                 fadeOutColor="#050505"
                                 className="text-gray-500"
+                                ariaLabel="Technology Stack"
                             />
                         </div>
                     </div>
@@ -444,92 +636,165 @@ export function AboutPage() {
                             Human-in-the-Loop <span className="hero-sub">by Design</span>
                         </h2>
                     </div>
-
-                    <p className="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center mb-12">
-                        AEGIS believes that AI governance should <span className="text-white font-semibold">empower humans, not replace them</span>. Our platform provides intelligent escalation for high-risk decisions while automating routine compliance checks.
-                    </p>
-
-                    {/* Compact Stat Band */}
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-12 max-w-2xl mx-auto">
-                        <div className="text-center flex-1">
-                            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2">100%</div>
-                            <p className="text-gray-400 text-xs uppercase tracking-wider">Decisions Explainable</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                        <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 text-center">
+                            <div className="text-4xl font-bold text-cyan-400 mb-2 font-playfair italic">100%</div>
+                            <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Explainable Decisions</p>
                         </div>
-                        <div className="hidden md:block w-px h-12 bg-white/10"></div>
-                        <div className="text-center flex-1">
-                            <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">&lt;30s</div>
-                            <p className="text-gray-400 text-xs uppercase tracking-wider">Regulator Answer Time</p>
+                        <div className="bg-white/5 border border-white/10 rounded-[32px] p-8 text-center">
+                            <div className="text-4xl font-bold text-purple-400 mb-2 font-playfair italic">&lt;30s</div>
+                            <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Escalation SLA</p>
+                        </div>
+                    </div>
+
+                    <p className="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto text-center font-light">
+                        SURO was founded to solve the enterprise AI governance crisis. We build the control layer that stands between your AI tools and your liability, providing intelligent escalation for high-risk decisions while automating routine compliance checks.
+                    </p>
+                </div>
+            </section>
+
+            {/* ═══════════════ THE LEADERSHIP: FOUNDING TEAM ═══════════════ */}
+            <section className="py-24 px-8 border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col lg:flex-row gap-20 items-center">
+                        <div className="lg:w-1/3">
+                            <Badge icon={<Users className="w-4 h-4" />} className="mb-6">
+                                Leadership
+                            </Badge>
+                            <h2 className="text-5xl font-light brand-heading leading-tight mb-8">
+                                Built by <span className="italic font-playfair text-white/30">Experts</span>
+                            </h2>
+                            <p className="text-lg text-gray-400 font-light leading-relaxed">
+                                Our founding team brings together deep expertise in AI safety, distributed systems, and enterprise risk management. We are committed to building the transparent foundation required for the next era of automation.
+                            </p>
+                        </div>
+
+                        <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                            {[
+                                {
+                                    name: "Suhayb Muzammil Shaik",
+                                    role: "Founder & CEO",
+                                    bio: "Visionary leader focused on aligning machine intent with human values. Previously Lead Architect in mission-critical autonomous systems at Scale AI.",
+                                    linkedin: "https://www.linkedin.com/in/suhayb-muzammil-shaik-13985231a/"
+                                },
+                                {
+                                    name: "Rohan Rao",
+                                    role: "Founder & CTO",
+                                    bio: "Specialist in distributed governance and high-performance interceptors. Leading the technical evolution of the SURO Core.",
+                                    linkedin: "https://www.linkedin.com/in/rohanrao2/"
+                                }
+                            ].map((member, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.2 }}
+                                    className="bg-white/5 border border-white/10 rounded-[32px] p-8 group hover:border-cyan-400/30 transition-all"
+                                >
+                                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-400/20 to-purple-500/20 mb-6 flex items-center justify-center border border-white/10 group-hover:scale-105 transition-transform overflow-hidden">
+                                        <div className="text-2xl font-bold text-white/40">{member.name[0]}</div>
+                                    </div>
+                                    <h3 className="text-2xl font-bold brand-heading mb-1">{member.name}</h3>
+                                    <p className="text-cyan-400 text-xs font-mono uppercase tracking-widest mb-4 font-bold">{member.role}</p>
+                                    <p className="text-gray-400 text-sm leading-relaxed mb-6">{member.bio}</p>
+                                    <a href={member.linkedin} className="text-white/40 hover:text-white transition-colors flex items-center gap-2 text-xs font-mono uppercase tracking-tighter">
+                                        LinkedIn <ArrowRight className="w-3 h-3" />
+                                    </a>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 2024 Global AI Governance Impact Section */}
-            <section className="py-40 px-8 bg-gradient-to-b from-black via-purple-950/10 to-black">
+            {/* ═══════════════ THE ROI: INSTITUTIONAL IMPACT REPORT ═══════════════ */}
+            <section className="py-40 px-8 bg-black relative">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
-                        <Badge icon={<TrendingUp className="w-4 h-4" />} className="mb-6">
-                            Scaling Global Confidence
-                        </Badge>
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" as="span" by="word">The ROI of</TextAnimate>
-                            {" "}
-                            <TextAnimate
-                                animation="blurInUp"
-                                as="span"
-                                by="word"
-                                className="text-white"
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-32">
+                        <div className="lg:col-span-12">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
                             >
-                                Governance
-                            </TextAnimate>
-                        </h2>
-                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            By 2025, 90% of enterprises will have formal AI governance. AEGIS ensures your organization is in the top 10% of leaders, not the 90% of stragglers.
-                        </p>
+                                <Badge icon={<TrendingUp className="w-3 h-3" />} className="mb-8">
+                                    <span className="font-mono text-[9px] tracking-widest uppercase">External_Assessment</span>
+                                </Badge>
+                                <h2 className="text-5xl md:text-8xl font-light brand-heading leading-[0.9]">
+                                    A New Standard <br />
+                                    <span className="italic font-playfair text-white/20">of Confidence</span>
+                                </h2>
+                            </motion.div>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
                         {[
-                            { value: "90%", label: "Enterprise Adoption", source: "McKinsey 2024", desc: "Predicted AI governance adoption by 2025." },
-                            { value: "65%", label: "Compliance Gap", source: "IAPP", desc: "Organizations currently lack real-time AI visibility." },
-                            { value: "60%", label: "Higher Revenue", source: "BCG", desc: "Outperformance by AI leaders in regulated sectors." },
-                            { value: "20bps", label: "Margin Growth", source: "Accenture", desc: "Efficiency gain from automated AI audits." }
+                            { value: "73%", label: "Visibility Gap", source: "Gartner, 2024", desc: "Enterprises lacking real-time AI usage visibility." },
+                            { value: "3.2x", label: "ROI Multiplier", source: "Forrester Alpha", desc: "Return on automated regulatory interception." },
+                            { value: "95%", label: "Leak Reduction", source: "Internal Pilot", desc: "Reduction in PII exfiltration via LLM prompts." },
+                            { value: "<200ms", label: "Latency Compliance", source: "SURO Core", desc: "Real-time governance enforcement threshold." }
                         ].map((stat, i) => (
-                            <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/[0.08] transition-all group">
-                                <div className="text-4xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white/[0.03] backdrop-blur-xl border border-white/5 rounded-[32px] p-8 hover:bg-white/[0.05] hover:border-cyan-400/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] transition-all group cursor-default"
+                            >
+                                <div className="text-4xl font-bold text-white mb-4 font-playfair italic group-hover:text-cyan-400 transition-colors">
                                     <EncryptedText text={stat.value} duration={1500} />
                                 </div>
-                                <h4 className="text-sm font-bold text-purple-400 uppercase tracking-widest mb-4">{stat.label}</h4>
-                                <p className="text-gray-400 text-xs leading-relaxed mb-6">{stat.desc}</p>
-                                <div className="text-[10px] text-gray-500 font-mono uppercase">Source: {stat.source}</div>
-                            </div>
+                                <h4 className="text-[10px] font-mono text-cyan-400/60 uppercase tracking-widest mb-4 group-hover:text-cyan-400 transition-colors font-bold">{stat.label}</h4>
+                                <p className="text-xs text-gray-500 leading-relaxed mb-6 group-hover:text-gray-400 transition-colors">{stat.desc}</p>
+                                <div className="text-[8px] text-white/20 font-mono uppercase tracking-widest group-hover:text-white/40 transition-colors font-bold">Ref: {stat.source}</div>
+                            </motion.div>
                         ))}
                     </div>
 
-                    <div className="bg-purple-900/10 border border-purple-500/20 rounded-[40px] p-12 relative overflow-hidden">
-                        <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-                            <div className="md:w-1/2">
-                                <h3 className="text-3xl font-bold mb-6 brand-heading">Aligned with Global Standards</h3>
-                                <p className="text-gray-400 leading-relaxed mb-8">
-                                    AEGIS isn't just a tool; it's a bridge to international compliance. Our architecture map directly to the **EU AI Act (High-Risk Systems)** and the **NIST AI RMF**, ensuring your local innovation meets global scrutiny.
+                    <div className="flex flex-col items-center mb-24">
+                        <motion.button
+                            onClick={() => navigate("/calculator")}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex items-center gap-4 bg-white text-black px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(34,211,238,0.4)] transition-all"
+                        >
+                            <span>Calculate Your Enterprise Risk</span>
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </motion.button>
+                        <p className="mt-6 text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                            Estimated time: 2 minutes // No sign-up required
+                        </p>
+                    </div>
+
+                    <div className="bg-white/[0.02] border border-white/10 rounded-[48px] p-8 lg:p-20 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2" />
+                        <div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
+                            <div className="lg:w-1/2">
+                                <h3 className="text-4xl font-bold mb-8 brand-heading uppercase tracking-tighter italic">Global Standardization</h3>
+                                <p className="text-lg text-gray-400 font-light leading-relaxed mb-10">
+                                    Our architecture is pre-aligned with international directives.
+                                    SURO provides a direct translation layer for the **EU AI Act**
+                                    and the **NIST AI Risk Management Framework**, ensuring
+                                    territorial compliance is an automated byproduct of operation.
                                 </p>
-                                <div className="flex gap-4">
-                                    <div className="px-4 py-2 bg-white/5 rounded-full border border-white/10 text-xs font-bold text-gray-300">
-                                        NIST AI RMF 1.0
+                                <div className="flex flex-wrap gap-4">
+                                    <div className="px-5 py-2 bg-white/5 rounded-full border border-white/10 text-[9px] font-mono font-bold text-gray-300 uppercase tracking-widest">
+                                        NIST_RMF_V1.1
                                     </div>
-                                    <div className="px-4 py-2 bg-white/5 rounded-full border border-white/10 text-xs font-bold text-gray-300">
-                                        EU AI ACT READY
+                                    <div className="px-5 py-2 bg-white/5 rounded-full border border-white/10 text-[9px] font-mono font-bold text-gray-300 uppercase tracking-widest">
+                                        EU_AI_ACT_CERT
                                     </div>
                                 </div>
                             </div>
-                            <div className="md:w-1/2 grid grid-cols-2 gap-4">
-                                <div className="p-6 bg-black/40 rounded-2xl border border-white/5">
-                                    <h4 className="text-purple-400 font-bold mb-2">Audit Ready</h4>
-                                    <p className="text-xs text-gray-500">Human-readable narratives for complex AI decision trails.</p>
+                            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="p-8 bg-black/40 rounded-3xl border border-white/5 backdrop-blur-md">
+                                    <h4 className="text-white font-bold mb-3 uppercase tracking-widest text-xs">Immutable Audit</h4>
+                                    <p className="text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest">Full lineage tracking for every generative interaction.</p>
                                 </div>
-                                <div className="p-6 bg-black/40 rounded-2xl border border-white/5">
-                                    <h4 className="text-blue-400 font-bold mb-2">Zero Trust</h4>
-                                    <p className="text-xs text-gray-500">Gateway enforcement that blocks PII before it leaves.</p>
+                                <div className="p-8 bg-black/40 rounded-3xl border border-white/5 backdrop-blur-md lg:mt-6">
+                                    <h4 className="text-white font-bold mb-3 uppercase tracking-widest text-xs">PII Intercept</h4>
+                                    <p className="text-[10px] text-gray-500 leading-relaxed uppercase tracking-widest">Deterministic blocking of classification data sets.</p>
                                 </div>
                             </div>
                         </div>
@@ -561,13 +826,16 @@ export function AboutPage() {
                     {/* Compliance Chips */}
                     <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
                         {["GDPR", "SOX", "HIPAA", "NIST AI RMF", "EU AI Act", "PCI DSS", "ISO 27001", "CCPA"].map(
-                            (standard) => (
-                                <div
+                            (standard, i) => (
+                                <motion.div
                                     key={standard}
-                                    className="bg-white/10 border border-purple-500/30 rounded-full px-6 py-3 text-center hover:bg-purple-500/20 hover:border-purple-400/50 transition-all cursor-default backdrop-blur-sm"
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: i * 0.05 }}
+                                    className="bg-white/5 border border-white/10 rounded-full px-6 py-3 text-center hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all cursor-default backdrop-blur-md"
                                 >
-                                    <p className="font-semibold text-base">{standard}</p>
-                                </div>
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gray-400 hover:text-cyan-400 transition-colors font-bold">{standard}</p>
+                                </motion.div>
                             )
                         )}
                     </div>
@@ -578,31 +846,90 @@ export function AboutPage() {
                 </div>
             </section>
 
+            {/* ═══════════════ CORPORATE OVERVIEW ═══════════════ */}
+            <section className="py-24 px-8 border-t border-white/5 bg-zinc-950/20">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div>
+                            <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Partners & Investors</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                                Backed by leading venture capital firms focused on the future of secure AI infrastructure.
+                            </p>
+                            <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest cursor-pointer hover:text-white transition-colors underline underline-offset-4">Investor Portal →</span>
+                        </div>
+                        <div>
+                            <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Press & Media</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                                For inquiries regarding SURO Core developments and AI governance regulatory insights.
+                            </p>
+                            <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest cursor-pointer hover:text-white transition-colors underline underline-offset-4">Media Kit (v2.1) →</span>
+                        </div>
+                        <div>
+                            <h3 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Careers</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                                Join a team of engineers and policy experts building the unified control layer for machine intent.
+                            </p>
+                            <span className="text-cyan-400 font-mono text-[10px] uppercase tracking-widest cursor-pointer hover:text-white transition-colors underline underline-offset-4">4 Open Positions →</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
-            {/* CTA Section - Stronger Design */}
-            <section className="py-40 px-8">
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-purple-500/40 rounded-3xl p-16 text-center backdrop-blur-sm">
-                        <h2 className="display-text text-5xl md:text-6xl mb-6 brand-heading">
-                            <TextAnimate animation="blurInUp" as="span" by="word">See AEGIS in Action</TextAnimate>
-                        </h2>
-                        <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                            Experience how <span className="text-white font-semibold">real-time governance</span> transforms AI adoption from risky to trustworthy.
-                        </p>
-                        <Link
-                            to="/dashboard"
-                            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-5 rounded-full text-xl font-medium hover:shadow-2xl hover:shadow-purple-500/50 transition-all"
+
+            {/* CTA Section - Cinematic Design with Control Room Image */}
+            <section className="relative overflow-hidden">
+                {/* Full-bleed cinematic background */}
+                <div className="absolute inset-0">
+                    <img
+                        src="/images/Cinematic Lighting Setup.png"
+                        alt="SURO Command Center"
+                        className="w-full h-full object-cover object-center"
+                    />
+                    {/* Dark overlays for text legibility */}
+                    <div className="absolute inset-0 bg-black/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+                    {/* Subtle cyan vignette at the bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
+                </div>
+
+                <div className="relative z-10 py-48 px-8 text-center">
+                    <div className="max-w-4xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
                         >
-                            Explore Dashboard <ArrowRight className="w-6 h-6" />
-                        </Link>
+                            <p className="font-mono text-[10px] tracking-[0.5em] uppercase text-cyan-400/60 mb-8">
+                                COMMAND_PROTOCOL // ACTIVE
+                            </p>
+                            <h2 className="text-5xl md:text-7xl font-light brand-heading mb-8 leading-tight">
+                                <TextAnimate animation="blurInUp" as="span" by="word">See SURO in Action</TextAnimate>
+                            </h2>
+                            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+                                Experience how{" "}
+                                <span className="text-cyan-400 font-semibold">real-time AI governance</span>{" "}
+                                transforms autonomous systems from risky to trustworthy. See policy enforcement,
+                                behavioral scoring, and intent alignment in action.
+                            </p>
+                            <Link
+                                to="/contact"
+                                className="inline-flex items-center gap-3 bg-cyan-400 hover:bg-cyan-300 text-black px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest shadow-[0_0_60px_rgba(34,211,238,0.5)] hover:shadow-[0_0_80px_rgba(34,211,238,0.7)] transition-all duration-300 group"
+                                style={{ fontFamily: "'Playfair Display', serif" }}
+                            >
+                                Book Enterprise Demo{" "}
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                            </Link>
+                        </motion.div>
                     </div>
                 </div>
             </section>
 
             <Footer />
-        </div>
+        </div >
     );
 }
+
 
 

@@ -10,9 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Shield, AlertTriangle, TrendingUp } from "lucide-react";
+import { Shield, AlertTriangle, TrendingUp, Plus } from "lucide-react";
 import { mockPolicies } from "./mock-data";
 import type { RiskLevel } from "./types";
+import { toast } from "sonner";
 
 export function PolicyEnforcementView() {
   const getRiskBadge = (risk: RiskLevel) => {
@@ -32,7 +33,9 @@ export function PolicyEnforcementView() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl">Policy Enforcement</h2>
-        <Button>Create New Policy</Button>
+        <Button onClick={() => toast.info("Policy Generation Wizard starting...")}>
+          <Plus className="w-4 h-4 mr-2" /> Create New Policy
+        </Button>
       </div>
 
       {/* Policy Summary Cards */}
@@ -114,11 +117,10 @@ export function PolicyEnforcementView() {
                   <TableCell className="text-sm">{policy.regulation}</TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <span className={`font-medium ${
-                        policy.violation_count > 100 ? 'text-red-600' :
+                      <span className={`font-medium ${policy.violation_count > 100 ? 'text-red-600' :
                         policy.violation_count > 50 ? 'text-amber-600' :
-                        'text-green-600'
-                      }`}>
+                          'text-green-600'
+                        }`}>
                         {policy.violation_count}
                       </span>
                       {policy.violation_count > 100 && (
@@ -128,14 +130,25 @@ export function PolicyEnforcementView() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Switch checked={policy.status === "Active"} />
+                      <Switch
+                        checked={policy.status === "Active"}
+                        onCheckedChange={(checked) => {
+                          toast[checked ? 'success' : 'warning'](`Policy ${policy.policy_id} ${checked ? 'enabled' : 'disabled'}`);
+                        }}
+                      />
                       <Badge variant={policy.status === "Active" ? "default" : "secondary"}>
                         {policy.status}
                       </Badge>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Button variant="outline" size="sm">Edit</Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => toast(`Editing Policy ${policy.policy_id}: ${policy.name}`)}
+                    >
+                      Edit
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -146,3 +159,4 @@ export function PolicyEnforcementView() {
     </div>
   );
 }
+
