@@ -22,20 +22,22 @@ export function ComparisonLens() {
     ];
 
     return (
-        <section className="relative py-32 px-8 overflow-hidden bg-black">
+        <section className="relative py-16 md:py-32 px-4 md:px-8 overflow-hidden bg-black">
             <div className="max-w-4xl mx-auto text-center mb-20">
                 <span className="text-purple-400 font-mono text-[10px] tracking-[0.3em] uppercase mb-4 block">Interactive Proof</span>
                 <h2 className="text-4xl md:text-5xl font-medium mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
                     The Governance Lens
                 </h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                    Drag the slider to see how SURO physically transforms raw, high-risk data into governed intelligence in real-time.
+                    <span className="md:hidden">Drag the slider</span>
+                    <span className="hidden md:inline">Drag the slider</span>
+                    {" "}to see how SURO physically transforms raw, high-risk data into governed intelligence in real-time.
                 </p>
             </div>
 
             <div
                 ref={containerRef}
-                className="max-w-6xl mx-auto relative aspect-[21/9] rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl select-none cursor-col-resize"
+                className="max-w-6xl mx-auto relative aspect-[4/3] md:aspect-[21/9] rounded-xl md:rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl select-none cursor-col-resize touch-none"
                 onMouseMove={handleMouseMove}
                 onTouchMove={handleMouseMove}
             >

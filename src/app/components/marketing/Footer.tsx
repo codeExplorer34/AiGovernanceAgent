@@ -6,11 +6,11 @@ import { FooterTicker } from "./FooterTicker";
 
 export function Footer() {
     return (
-        <footer className="bg-black border-t border-white/10 pt-20 pb-10">
-            <div className="max-w-7xl mx-auto px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <footer className="bg-black border-t border-white/10 pt-12 md:pt-20 pb-24 md:pb-10">
+            <div className="max-w-7xl mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
                     {/* Brand */}
-                    <div className="col-span-1">
+                    <div className="col-span-2 md:col-span-1">
                         <div className="flex items-center gap-2 mb-4">
                             <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center">
                                 <ShieldStreamIcon className="w-5 h-5 text-cyan-400" />

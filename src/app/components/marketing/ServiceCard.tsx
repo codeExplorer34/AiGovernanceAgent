@@ -49,7 +49,7 @@ export function ServiceCard({ icon, title, subtitle, description, className = ""
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-emerald-500/30 transition-all duration-300 overflow-hidden cursor-none shadow-[inset_0_1px_10px_rgba(0,0,0,0.5)] border-t-white/20 hover:shadow-[inset_0_1px_10px_rgba(0,0,0,0.5),0_8px_32px_rgba(16,185,129,0.08)]"
+            className="group relative h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:border-emerald-500/30 active:border-emerald-500/30 active:scale-[0.98] transition-all duration-300 overflow-hidden cursor-none shadow-[inset_0_1px_10px_rgba(0,0,0,0.5)] border-t-white/20 hover:shadow-[inset_0_1px_10px_rgba(0,0,0,0.5),0_8px_32px_rgba(16,185,129,0.08)]"
         >
             {/* Dynamic Shine Layer */}
             <motion.div

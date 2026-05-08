@@ -17,7 +17,7 @@ import { StrategicDifferentiation } from "../components/marketing/StrategicDiffe
 import { ProcessJourney } from "../components/marketing/ProcessJourney";
 import { ActiveGrid } from "../components/ui/ActiveGrid";
 import { TextDecrypt } from "../components/ui/TextDecrypt";
-import { KineticEnforcement } from "../components/marketing/KineticEnforcement";
+
 import { HeroHeadline } from "../components/ui/HeroHeadline";
 import { MagneticButton } from "../components/ui/MagneticButton";
 import { ScrollRevealThesis } from "../components/marketing/ScrollRevealThesis";
@@ -34,11 +34,14 @@ import { TypingText } from "../components/ui/TypingText";
 import { useSound } from "../components/ui/SoundProvider";
 import { TrustRibbon } from "../components/marketing/TrustRibbon";
 import { DeploymentSection } from "../components/marketing/DeploymentSection";
+import { useIsMobile } from "../hooks/useMediaQuery";
+import { MobileCTABar } from "../components/ui/MobileCTABar";
 
 
 export function LandingPage() {
     const navigate = useNavigate();
     const videoRef = React.useRef<HTMLVideoElement>(null);
+    const isMobile = useIsMobile();
 
 
     // ── Mouse Parallax Logic ──
@@ -67,7 +70,7 @@ export function LandingPage() {
             className="relative min-h-screen bg-black text-white font-['Playfair_Display',serif] z-[1]"
             onMouseMove={handleMouseMove}
         >
-            <InfiniteDataStream className="opacity-100" columnCount={12} speed={1.5} />
+            <InfiniteDataStream className="opacity-100" columnCount={isMobile ? 4 : 12} speed={isMobile ? 1 : 1.5} />
             <ChapterProgress />
             <Navbar />
 
@@ -80,19 +83,23 @@ export function LandingPage() {
                 data-scene="introduction"
                 className="relative min-h-screen flex items-center overflow-hidden"
             >
-                {/* LAYER 0: Background Video (Static Play) */}
+                {/* LAYER 0: Background — Video on desktop, gradient on mobile */}
                 <div className="absolute inset-0 z-0 select-none pointer-events-none transform-gpu" style={{ willChange: "transform" }}>
-                    <video
-                        ref={videoRef}
-                        src="/Videos/Cinematic Timelapse.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1] brightness-[0.8]"
-                        style={{ transform: "translateZ(0)" }}
-                    />
+                    {!isMobile ? (
+                        <video
+                            ref={videoRef}
+                            src="/Videos/Cinematic Timelapse.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1] brightness-[0.8]"
+                            style={{ transform: "translateZ(0)" }}
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-black via-purple-950/30 to-black" />
+                    )}
                 </div>
 
                 {/* LAYER 1: Balanced Overlays (Vignette + Global Fade) */}
@@ -106,7 +113,7 @@ export function LandingPage() {
                 </div>
 
                 {/* LAYER 2: Content Wrapper (Centered) */}
-                <div className="relative z-20 max-w-7xl mx-auto px-8 w-full flex flex-col items-center text-center pt-32 pb-20">
+                <div className="relative z-20 max-w-7xl mx-auto px-4 md:px-8 w-full flex flex-col items-center text-center pt-28 md:pt-32 pb-16 md:pb-20">
                     <div className="max-w-4xl" data-scene-element>
                         {/* Status Token */}
                         <motion.div
@@ -153,10 +160,10 @@ export function LandingPage() {
                             transition={{ delay: 0.6, duration: 1 }}
                             className="flex flex-col items-center gap-4"
                         >
-                            <h1 className="text-6xl md:text-8xl font-light tracking-tight text-white/95 leading-[1.05] font-playfair mb-4">
+                            <h1 className="text-4xl sm:text-6xl md:text-8xl font-light tracking-tight text-white/95 leading-[1.05] font-playfair mb-4">
                                 <span className="block mb-1">Govern Every</span>
                                 <span className="block italic">AI Interaction</span>
-                                <span className="block text-4xl md:text-5xl mt-2 text-white/40">Across Your Enterprise</span>
+                                <span className="block text-2xl sm:text-4xl md:text-5xl mt-2 text-white/40">Across Your Enterprise</span>
                             </h1>
 
                             <div className="flex items-center gap-4 text-xs font-mono text-cyan-400/60 uppercase tracking-[0.4em] bg-black/40 backdrop-blur-md px-6 py-2 rounded-full border border-white/5">
@@ -164,8 +171,8 @@ export function LandingPage() {
                                 <TypingText text="Executing Policy Gate // Online // <200ms Latency" speed={40} />
                             </div>
 
-                            <p className="text-gray-300 text-lg md:text-2xl font-light leading-relaxed mb-10 max-w-4xl mx-auto font-playfair">
-                                Block PII leaks, enforce policy, and deliver audit-ready governance in under <span className="text-cyan-400 font-semibold font-mono">200ms</span>. <br />
+                            <p className="text-gray-300 text-base md:text-2xl font-light leading-relaxed mb-8 md:mb-10 max-w-4xl mx-auto font-playfair px-2">
+                                Block PII leaks, enforce policy, and deliver audit-ready governance in under <span className="text-cyan-400 font-semibold font-mono">200ms</span>. <br className="hidden md:block" />
                                 <span className="text-white/60 italic font-medium">Stop shadow AI before it reaches external models.</span>
                             </p>
                         </motion.div>
@@ -176,20 +183,29 @@ export function LandingPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1, duration: 0.8 }}
-                            className="flex items-center justify-center gap-6 flex-wrap"
+                            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 flex-wrap w-full sm:w-auto"
                         >
-                            <MagneticButton
-                                onClick={() => navigate("/contact")}
-                                strength={0.2}
-                                className="group relative border border-cyan-400 text-cyan-400 px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden hover:shadow-[0_0_20px_rgba(0,255,255,0.6)]"
-                            >
-                                <span className="relative z-10 transition-colors uppercase">Book Enterprise Demo</span>
-                                <div className="absolute inset-0 bg-cyan-400/20 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-0" />
-                            </MagneticButton>
+                            {isMobile ? (
+                                <button
+                                    onClick={() => navigate("/contact")}
+                                    className="w-full max-w-xs border border-cyan-400 text-cyan-400 px-8 py-4 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all active:scale-95 active:bg-cyan-400/10"
+                                >
+                                    Book Enterprise Demo
+                                </button>
+                            ) : (
+                                <MagneticButton
+                                    onClick={() => navigate("/contact")}
+                                    strength={0.2}
+                                    className="group relative border border-cyan-400 text-cyan-400 px-12 py-5 rounded-full text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden hover:shadow-[0_0_20px_rgba(0,255,255,0.6)]"
+                                >
+                                    <span className="relative z-10 transition-colors uppercase">Book Enterprise Demo</span>
+                                    <div className="absolute inset-0 bg-cyan-400/20 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-0" />
+                                </MagneticButton>
+                            )}
 
                             <button
                                 onClick={() => navigate("/sandbox")}
-                                className="group flex items-center gap-3 text-white/60 hover:text-white transition-colors py-4 px-2"
+                                className="group flex items-center gap-3 text-white/60 hover:text-white active:text-cyan-400 transition-colors py-4 px-2"
                             >
                                 <span className="text-[11px] font-mono uppercase tracking-[0.3em]">Try the Sandbox</span>
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-cyan-400" />
@@ -209,23 +225,27 @@ export function LandingPage() {
             <ProductVideoSection />
 
             {/* Subtle Post-Dashboard Video Background Section */}
-            <section className="relative h-[60vh] flex items-center justify-center overflow-hidden border-y border-white/5">
+            <section className="relative h-[40vh] md:h-[60vh] flex items-center justify-center overflow-hidden border-y border-white/5">
                 <div className="absolute inset-0 z-0">
-                    <video
-                        src="/Videos/Video 2.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover opacity-20"
-                    />
+                    {!isMobile ? (
+                        <video
+                            src="/Videos/Video 2.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover opacity-20"
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-gradient-to-b from-black via-cyan-950/10 to-black" />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
                 </div>
-                <div className="relative z-10 text-center max-w-4xl px-8">
-                    <p className="font-mono text-[10px] tracking-[0.5em] uppercase text-cyan-400/60 mb-6">
+                <div className="relative z-10 text-center max-w-4xl px-4 md:px-8">
+                    <p className="hidden md:block font-mono text-[10px] tracking-[0.5em] uppercase text-cyan-400/60 mb-6">
                         <TypingText text="PERSISTENT_GOVERNANCE_PROTOCOL // ACTIVE" delay={1} speed={60} />
                     </p>
-                    <h3 className="text-3xl md:text-5xl font-light leading-tight text-white/90 font-playfair">
+                    <h3 className="text-2xl sm:text-3xl md:text-5xl font-light leading-tight text-white/90 font-playfair">
                         Always Watching. Always Enforcing. <br />
                         <span className="block mt-2 text-cyan-400">Total Operational</span>
                         <span className="block text-cyan-400">Integrity.</span>
@@ -234,7 +254,7 @@ export function LandingPage() {
             </section>
 
             {/* Kinetic Enforcement Loop — Capability Breadth */}
-            <KineticEnforcement />
+
 
             {/* ═══════════════ DEPLOYMENT ARCHITECTURE ═══════════════ */}
             <DeploymentSection />
@@ -255,7 +275,7 @@ export function LandingPage() {
             {/* Instant Explainability - Moved up for immediate proof */}
 
             {/* Instant Explainability - Moved up for immediate proof */}
-            <section className="py-32 px-8 bg-gradient-to-b from-black via-blue-900/5 to-black">
+            <section className="py-16 md:py-32 px-4 md:px-8 bg-gradient-to-b from-black via-blue-900/5 to-black">
                 <div className="max-w-5xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -300,7 +320,7 @@ export function LandingPage() {
             </section>
 
             {/* Top Use Cases */}
-            <section className="py-32 px-8">
+            <section className="py-16 md:py-32 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -403,7 +423,7 @@ export function LandingPage() {
             </section>
 
             {/* Governance Intelligence - CardSwap Integration */}
-            <section className="py-32 px-8 overflow-hidden relative">
+            <section className="py-16 md:py-32 px-4 md:px-8 overflow-hidden relative">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div>
@@ -436,12 +456,12 @@ export function LandingPage() {
                             </div>
                         </div>
 
-                        <div className="relative h-[600px] flex items-center justify-center lg:justify-end">
+                        <div className="relative h-[380px] sm:h-[500px] md:h-[600px] flex items-center justify-center lg:justify-end">
                             <CardSwap
-                                width={420}
-                                height={320}
-                                cardDistance={30}
-                                verticalDistance={60}
+                                width={isMobile ? 300 : 420}
+                                height={isMobile ? 240 : 320}
+                                cardDistance={isMobile ? 20 : 30}
+                                verticalDistance={isMobile ? 40 : 60}
                                 delay={4000}
                                 pauseOnHover={true}
                                 skewAmount={2}
@@ -524,7 +544,7 @@ export function LandingPage() {
             </ScrollVelocityContainer>
 
             {/* Core Capabilities */}
-            <section className="py-32 px-8">
+            <section className="py-16 md:py-32 px-4 md:px-8">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -566,8 +586,8 @@ export function LandingPage() {
             </section>
 
             {/* ═══════════════ ROI RISK SECTION ═══════════════ */}
-            <section className="py-32 px-8 border-t border-white/5 bg-zinc-950/40 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <section className="py-16 md:py-32 px-4 md:px-8 border-t border-white/5 bg-zinc-950/40 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
                     <div className="md:w-2/3">
                         <Badge icon={<PieChart className="w-3 h-3" />} className="mb-6">
                             Risk Assessment
@@ -592,7 +612,7 @@ export function LandingPage() {
             </section>
 
             {/* CTA Section — Governance Convergence Point */}
-            <section className="py-40 px-8 border-t border-white/5 relative overflow-hidden" id="contact">
+            <section className="py-20 md:py-40 px-4 md:px-8 border-t border-white/5 relative overflow-hidden" id="contact">
                 {/* Governance grid echo from hero */}
                 <div className="absolute inset-0 z-0 opacity-[0.015]"
                     style={{
@@ -607,16 +627,16 @@ export function LandingPage() {
                     <Badge className="mb-8">
                         Ready to Deploy?
                     </Badge>
-                    <h2 className="text-5xl md:text-7xl font-bold mb-8 text-white brand-heading leading-tight">
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-8 text-white brand-heading leading-tight">
                         See SURO in Action
                     </h2>
                     <p className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
                         Experience how <span className="text-white font-semibold">real-time governance</span> transforms AI adoption from risky to trustworthy.
                     </p>
-                    <div className="flex flex-col items-center gap-4">
+                    <div className="flex flex-col items-center gap-4 w-full">
                         <Link
                             to="/contact"
-                            className="group bg-white text-black px-10 py-5 rounded-full text-xl font-medium hover:bg-cyan-400 hover:text-black transition-all flex items-center gap-2 shadow-2xl hover:shadow-cyan-500/20"
+                            className="group bg-white text-black px-8 md:px-10 py-4 md:py-5 rounded-full text-base md:text-xl font-medium hover:bg-cyan-400 hover:text-black active:scale-95 transition-all flex items-center gap-2 shadow-2xl hover:shadow-cyan-500/20 w-full max-w-xs md:w-auto justify-center"
                         >
                             Book Enterprise Demo <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                         </Link>
@@ -627,6 +647,7 @@ export function LandingPage() {
                 </div>
             </section>
 
+            <MobileCTABar />
             <SoundToggle />
             <Footer />
         </div >

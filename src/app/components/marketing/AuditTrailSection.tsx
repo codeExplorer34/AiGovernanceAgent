@@ -56,7 +56,7 @@ export function AuditTrailSection() {
     });
 
     return (
-        <section ref={containerRef} className="relative py-32 px-8">
+        <section ref={containerRef} className="relative py-16 md:py-32 px-4 md:px-8">
             <div className="max-w-4xl mx-auto text-center mb-24">
                 <h2 className="text-3xl font-medium mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
                     The Journey of a Protected Packet
@@ -97,9 +97,9 @@ export function AuditTrailSection() {
                     />
                 ))}
 
-                <div className="space-y-32">
+                <div className="space-y-12 md:space-y-32">
                     {steps.map((step, i) => (
-                        <div key={i} className={`flex items-center gap-12 ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                        <div key={i} className={`flex flex-col md:flex-row md:items-center gap-8 md:gap-12 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                             {/* Card */}
                             <motion.div
                                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}

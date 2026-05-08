@@ -45,12 +45,12 @@ const steps: ProcessStep[] = [
 
 export const ProcessJourney: React.FC = () => {
     return (
-        <section className="relative py-40 bg-black overflow-visible">
-            <div className="max-w-7xl mx-auto px-8 relative">
+        <section className="relative py-20 md:py-40 bg-black overflow-visible">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 relative">
                 {/* Section Header */}
                 <div className="text-center mb-20">
                     <Badge icon={<Sparkles className="w-4 h-4 text-purple-400" />}>The SURO Lifecycle</Badge>
-                    <h2 className="text-5xl md:text-7xl font-bold mt-6 brand-heading">
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mt-6 brand-heading">
                         Discover The Process <br /> <span className="text-white">Behind The Safety.</span>
                     </h2>
                 </div>
