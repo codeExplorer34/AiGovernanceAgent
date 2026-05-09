@@ -16,6 +16,7 @@ const PricingPage = lazy(() => import("./pages/PricingPage").then(m => ({ defaul
 import { Atmosphere } from "./components/ui/Atmosphere";
 import { GovernanceLens } from "./components/ui/GovernanceLens";
 import { SpeederLoader } from "./components/ui/SpeederLoader";
+import { Analytics } from "@vercel/analytics/react";
 import "../styles/hero-animations.css";
 
 export default function App() {
@@ -74,6 +75,7 @@ export default function App() {
           </Suspense>
         </Atmosphere>
       </GovernanceLens>
+      <Analytics />
     </Router>
   );
 }
